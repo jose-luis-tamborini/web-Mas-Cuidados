@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Tokens tomados del Figma ("pagina web correcciones"), diseñado a 1952 px de ancho.
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  Desktop (>= 1024 px): el tamaño base del html escala con el ancho de pantalla (16 px a 1952 px),
+  así toda la página se achica en proporción, igual que el diseño en Figma. Por eso en desktop
+  las medidas se escriben en rem = px del diseño / 16 (ej.: 64 px → 4rem).
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  Mobile (< 1024 px): no hay diseño; el html queda en 16 px y los textos usan los clamp() de abajo.
+*/
+@theme {
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+
+  --color-brand: #530567;
+  --color-brand-ink: #29023c;
+  --color-brand-deep: #4a007d;
+  --color-lilac: #986bba;
+  --color-mauve: #745f84;
+  --color-orchid: #a609cd;
+  --color-lavender: #f4eefa;
+  --color-lavender-soft: #f6eafb;
+  --color-cream: #fdfbf6;
+  --color-mist: #f3f1f5;
+  --color-muted: #9b8b9f;
+  --color-footer: #53227f;
+
+  /* Valores mobile. Los de desktop se pisan más abajo. */
+  --text-display: clamp(2.75rem, 1.96rem + 3.37vw, 3.75rem);
+  --text-display--line-height: 1.154;
+  --text-h1: clamp(2.25rem, 1.58rem + 2.85vw, 3.25rem);
+  --text-h1--line-height: 1.333;
+  --text-h2: clamp(2rem, 1.51rem + 2.07vw, 2.75rem);
+  --text-h2--line-height: 1.333;
+  --text-h3: clamp(1.875rem, 1.57rem + 1.29vw, 2.25rem);
+  --text-h3--line-height: 1.22;
+  --text-h4: clamp(1.625rem, 1.38rem + 1.04vw, 2rem);
+  --text-h4--line-height: 1.334;
+  --text-title: clamp(1.375rem, 1.16rem + 0.91vw, 1.75rem);
+  --text-title--line-height: 1.22;
+  --text-subtitle: clamp(1.25rem, 1.1rem + 0.65vw, 1.5rem);
+  --text-subtitle--line-height: 1.15;
+  --text-lead: clamp(1.0625rem, 0.96rem + 0.45vw, 1.25rem);
+  --text-lead--line-height: 1.45;
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+  --text-stat: clamp(2.75rem, 2.13rem + 2.65vw, 3.5rem);
+  --text-stat--line-height: 1;
+
+  --shadow-card: 0 4px 4px rgb(0 0 0 / 0.25);
+  --shadow-panel: 0 4px 7.5px 3px rgb(0 0 0 / 0.25);
+  --shadow-float: 6px 6px 40px rgb(0 0 0 / 0.25);
+
+  /* Carrusel de testimonios: la lista va duplicada, así que moverla la mitad cierra el loop. */
+  --animate-marquee: marquee 70s linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Desktop: escala proporcional al diseño y tamaños de letra exactos del Figma (px / 16). */
+@media (width >= 64rem) {
+  html {
+    /* 1952 / 16 = 122. Piso de 10.4 px para pantallas de 1024–1270 px. */
+    font-size: clamp(10.4px, calc(100vw / 122), 16px);
+  }
+
+  :root {
+    --text-display: 6rem; /* 96 */
+    --text-h1: 5rem; /* 80 */
+    --text-h2: 4rem; /* 64 */
+    --text-h3: 3.125rem; /* 50 */
+    --text-h4: 2.73rem; /* 43.7 */
+    --text-title: 2.25rem; /* 36 */
+    --text-subtitle: 2rem; /* 32 */
+    --text-lead: 1.5rem; /* 24 */
+    --text-body: 1.25rem; /* 20 */
+    --text-stat: 5.3125rem; /* 85 */
+  }
+}
+
+/* Contenido a 1650 px del diseño, centrado. */
+@utility container-site {
+  width: 100%;
+  max-width: calc(103.125rem + 4rem);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+  @variant lg {
+    padding-inline: 2rem;
+  }
+}
+
+/* Degradado violeta oscuro (banners y botones) */
+@utility bg-gradient-night {
+  background-image: linear-gradient(90deg, #200e30 0%, #652b96 100%);
+}
+
+/* Degradado ciruela (números y logos de bancos) */
+@utility bg-gradient-plum {
+  background-image: linear-gradient(269deg, #4e145c 40%, #7a3f88 100%);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-brand);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Deja lugar para el header fijo al saltar a un ancla */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

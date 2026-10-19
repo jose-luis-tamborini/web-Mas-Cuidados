@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Copia local del Figma y scripts auxiliares (no se versionan).
+    ".figma/**",
   ]),
 ]);
 
