@@ -1,26 +1,33 @@
 import Image from "next/image";
 import hero from "@/public/images/home/hero.jpg";
 
-// TODO: el diseño lleva un video de fondo ("Video pag web nuevo 03"). Cuando llegue el archivo,
-// pasarlo en `videoSrc`; la foto actual queda como póster mientras carga.
-const videoSrc: string | null = null;
+// Video de fondo ("Video pag web nuevo 03"): 1080p en desktop y 720p en pantallas chicas, en AV1 con
+// H.264 de respaldo para los navegadores que no lo reproducen. La foto (primer cuadro del video) queda
+// debajo mientras carga. Con "reducir movimiento" activado no coincide ninguna fuente y queda la foto.
+const motion = "(prefers-reduced-motion: no-preference)";
+const videoSources = [
+  { src: "/videos/home/hero-1080-av1.mp4", type: 'video/mp4; codecs="av01.0.08M.08"', media: `${motion} and (min-width: 1024px)` },
+  { src: "/videos/home/hero-1080-h264.mp4", type: "video/mp4", media: `${motion} and (min-width: 1024px)` },
+  { src: "/videos/home/hero-720-av1.mp4", type: 'video/mp4; codecs="av01.0.05M.08"', media: motion },
+  { src: "/videos/home/hero-720-h264.mp4", type: "video/mp4", media: motion },
+];
 
 export default function HeroSection() {
   return (
     <section className="relative isolate flex min-h-[38rem] items-center overflow-hidden bg-brand-ink pt-16 text-white lg:h-[68.6875rem] lg:min-h-0 lg:items-start lg:pt-0">
-      {videoSrc ? (
-        <video
-          className="absolute inset-0 -z-20 size-full object-cover"
-          src={videoSrc}
-          poster={hero.src}
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      ) : (
-        <Image src={hero} alt="" fill preload sizes="100vw" className="-z-20 object-cover" />
-      )}
+      <Image src={hero} alt="" fill preload sizes="100vw" className="-z-20 object-cover" />
+      <video
+        className="absolute inset-0 -z-20 size-full object-cover motion-reduce:hidden"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      >
+        {videoSources.map((s) => (
+          <source key={s.src} {...s} />
+        ))}
+      </video>
       {/* Degradado hacia el violeta oscuro en la parte baja, como en el diseño */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-b from-[#2c0536]/0 from-35% to-[#311647]" />
 
