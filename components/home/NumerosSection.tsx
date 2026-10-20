@@ -2,7 +2,6 @@ import CountUp from "@/components/ui/CountUp";
 import { reveal } from "@/components/ui/reveal";
 
 // El año cuenta desde 1990 para que se lea como años que pasan (desde 0 parece una cantidad).
-// TODO: el cliente tiene que elegir entre las variantes de /demo-anio; después borrar esa página.
 const numeros = [
   { label: "Cuidando familias desde", conteo: { to: 2002, from: 1990, agrupar: false } },
   { label: "Beneficiarios", conteo: { to: 60000, prefix: "+" } },

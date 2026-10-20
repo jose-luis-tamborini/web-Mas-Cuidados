@@ -34,7 +34,7 @@ Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@t
 "Desde 2002" y 4 sedes (Rosario, Córdoba, Buenos Aires, Santa Fe; Paraná cerró). El Figma tiene datos viejos que hay que corregir al maquetar: "16 años de trayectoria" en Quiénes somos (usar "desde 2002"), "5 SEDES EN TODO EL PAÍS" en el banner de Component 9 y "Santa Fé/Paraná" o "Paraná" en sedes y footers.
 
 ## Pendientes del cliente/diseñadora
-Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), número de WhatsApp, redes, destino de "Trabajá con nosotros" y política de privacidad, a dónde llegan los formularios, cómo anima el año en la sección de números (variantes en `/demo-anio`, página temporal: borrarla cuando elijan), testimonios con texto repetido (Berni Buratti y Emilse Silvas).
+Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), número de WhatsApp, redes, destino de "Trabajá con nosotros" y política de privacidad, a dónde llegan los formularios, testimonios con texto repetido (Berni Buratti y Emilse Silvas).
 
 ## Flujo acordado
 1. Inventario (páginas, secciones, componentes, colores, tipografías) → validar con el usuario antes de codear.
