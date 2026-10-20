@@ -1,14 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FacebookIcon, GlobeIcon, InstagramIcon, LinkedInIcon } from "@/components/icons";
+import { FaLinkedin, FaSquareFacebook } from "react-icons/fa6";
+import { GlobeIcon, InstagramIcon } from "@/components/icons";
 import { footerColumns, redes } from "@/lib/site";
 import logo from "@/public/brand/logo-vertical.png";
 
+// Los íconos de Font Awesome vienen en un lienzo de 448×512 con el cuadrado centrado:
+// se les da más alto para que el cuadrado visible mida 36 px, como en el diseño.
+const sizeFigma = "size-8 lg:size-[2.25rem]";
+const sizeFontAwesome = "h-[2.2857rem] w-8 lg:h-[2.5714rem] lg:w-[2.25rem]";
+
 const redesSociales = [
-  { label: "LinkedIn", href: redes.linkedin, Icon: LinkedInIcon },
-  { label: "Facebook", href: redes.facebook, Icon: FacebookIcon },
-  { label: "Instagram", href: redes.instagram, Icon: InstagramIcon },
-  { label: "Sitio web", href: redes.web, Icon: GlobeIcon },
+  { label: "LinkedIn", href: redes.linkedin, Icon: FaLinkedin, size: sizeFontAwesome },
+  { label: "Facebook", href: redes.facebook, Icon: FaSquareFacebook, size: sizeFontAwesome },
+  { label: "Instagram", href: redes.instagram, Icon: InstagramIcon, size: sizeFigma },
+  { label: "Sitio web", href: redes.web, Icon: GlobeIcon, size: sizeFigma },
 ];
 
 export default function Footer() {
@@ -50,10 +56,10 @@ export default function Footer() {
                 </ul>
                 {col.titulo === "Contacto" && (
                   <ul className="mt-4 flex items-center gap-3 lg:mt-[1.125rem] lg:gap-[0.875rem]">
-                    {redesSociales.map(({ label, href, Icon }) => (
+                    {redesSociales.map(({ label, href, Icon, size }) => (
                       <li key={label}>
                         <a href={href} aria-label={label} className="block transition-opacity hover:opacity-80">
-                          <Icon className="size-8 lg:size-[2.25rem]" />
+                          <Icon aria-hidden="true" className={size} />
                         </a>
                       </li>
                     ))}
