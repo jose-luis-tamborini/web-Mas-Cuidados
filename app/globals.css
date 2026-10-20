@@ -129,3 +129,54 @@
     scroll-behavior: auto;
   }
 }
+
+/*
+  Entrada al hacer scroll: los elementos con `data-reveal` suben y aparecen al entrar en pantalla
+  (lo maneja components/ui/RevealOnScroll.tsx). Va fuera de @layer para ganarle a las utilidades:
+  por eso `data-reveal` se pone en envoltorios que no tengan transiciones propias.
+*/
+[data-reveal] {
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="oculto"] {
+  opacity: 0;
+  transform: translateY(2.5rem);
+}
+
+/* Brillo que cruza las tarjetas de los bancos: una vez al aparecer y otra al pasar el mouse. */
+@layer components {
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.3) 50%, transparent 70%);
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  [data-reveal="visible"] .shine::after {
+    animation: shine 1.2s ease-in-out calc(var(--reveal-delay, 0ms) + 0.4s);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .shine:hover::after {
+      transform: translateX(100%);
+      transition: transform 0.9s ease-in-out;
+    }
+  }
+}
+
+@keyframes shine {
+  to {
+    transform: translateX(100%);
+  }
+}

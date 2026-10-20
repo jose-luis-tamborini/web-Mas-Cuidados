@@ -68,7 +68,7 @@ export const sedes: Sede[] = [
     mapsHref: maps("Larrea 1007, CABA"),
   },
   {
-    nombre: "Santa Fe/ Paraná",
+    nombre: "Santa Fe",
     direccion: ["Marcial Candioti 3456"],
     ciudad: "Santa Fe, Santa Fe",
     icono: "santa-fe",
@@ -100,7 +100,7 @@ export const footerColumns: { titulo: string; links: { label: string; href: stri
   },
   {
     titulo: "Nuestras sedes",
-    links: sedes.map((s) => ({ label: s.nombre.split("/")[0], href: s.mapsHref })),
+    links: sedes.map((s) => ({ label: s.nombre, href: s.mapsHref })),
   },
   {
     titulo: "Contacto",

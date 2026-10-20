@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import CheckList from "@/components/ui/CheckList";
 import Eyebrow from "@/components/ui/Eyebrow";
+import { reveal } from "@/components/ui/reveal";
 import seguros from "@/public/images/home/seguros.jpg";
 
 export default function SegurosSection() {
   return (
     <section aria-labelledby="seguros-titulo" className="bg-lavender py-16 lg:pt-[5.625rem] lg:pb-[6.0625rem]">
       <div className="container-site grid items-center gap-10 lg:grid-cols-[49.125rem_1fr] lg:gap-[4.25rem]">
-        <div className="relative aspect-[786/677] overflow-hidden rounded-[2.5rem] lg:rounded-[3.8125rem]">
+        <div {...reveal} className="relative aspect-[786/677] overflow-hidden rounded-[2.5rem] lg:rounded-[3.8125rem]">
           <Image
             src={seguros}
             alt="Cuidadora abrazando a una mujer mayor en silla de ruedas"
@@ -17,7 +18,7 @@ export default function SegurosSection() {
             className="object-cover"
           />
         </div>
-        <div>
+        <div {...reveal}>
           <Eyebrow>Seguros de planes de cuidados</Eyebrow>
           <h2 id="seguros-titulo" className="mt-4 max-w-[51.6875rem] font-serif text-h4 font-semibold lg:mt-[1rem]">
             Con una cuota mensual accesible, tu familia accede a cuidado en sanatorios, domicilio e instituciones

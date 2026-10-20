@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import { reveal } from "@/components/ui/reveal";
 import servicioParticular from "@/public/images/home/servicio-particular.jpg";
 import seguroInternacion from "@/public/images/home/seguro-internacion.jpg";
 import internacionDomiciliaria from "@/public/images/home/internacion-domiciliaria.jpg";
@@ -33,9 +34,13 @@ const servicios: Servicio[] = [
 export default function ServiciosSection() {
   return (
     <section aria-label="Nuestros servicios" className="container-site pt-4 lg:pt-[1.125rem]">
-      <ul className="grid gap-6 md:grid-cols-3 lg:gap-[1.3125rem]">
+      {/* Mobile: carrusel que se desliza de costado, con la siguiente tarjeta asomando. Desde md, grilla de 3. */}
+      <ul
+        {...reveal}
+        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pt-1 pb-3 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:p-0 lg:gap-[1.3125rem]"
+      >
         {servicios.map((s) => (
-          <li key={s.href}>
+          <li key={s.href} className="w-[82%] max-w-sm shrink-0 snap-start md:w-auto md:max-w-none">
             <Link
               href={s.href}
               className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] bg-white shadow-card transition-transform hover:-translate-y-1"
@@ -45,7 +50,7 @@ export default function ServiciosSection() {
                   src={s.imagen}
                   alt=""
                   fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
+                  sizes="(min-width: 768px) 33vw, 82vw"
                   className={`object-cover transition-transform duration-500 group-hover:scale-105 ${s.filtro ?? ""}`}
                 />
               </div>

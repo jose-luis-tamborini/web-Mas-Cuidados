@@ -1,6 +1,7 @@
 import Image, { type StaticImageData } from "next/image";
 import { QuoteIcon, StarIcon } from "@/components/icons";
 import Eyebrow from "@/components/ui/Eyebrow";
+import { reveal } from "@/components/ui/reveal";
 import micaela from "@/public/images/testimonios/micaela-gabutto.png";
 import monica from "@/public/images/testimonios/monica-zuccolo.png";
 import mariano from "@/public/images/testimonios/mariano-barrientos.png";
@@ -84,7 +85,7 @@ function Tarjeta({ t, hidden = false }: { t: Testimonio; hidden?: boolean }) {
 export default function TestimoniosSection() {
   return (
     <section aria-labelledby="testimonios-titulo" className="overflow-hidden pt-24 pb-16 lg:pt-[13.25rem] lg:pb-[8.625rem]">
-      <div className="container-site flex flex-col items-center text-center">
+      <div {...reveal} className="container-site flex flex-col items-center text-center">
         <Eyebrow>Testimonios</Eyebrow>
         <h2 id="testimonios-titulo" className="mt-1 font-serif text-h2 font-semibold lg:mt-[0.5625rem]">
           Lo que dicen las familias
@@ -92,7 +93,7 @@ export default function TestimoniosSection() {
       </div>
 
       {/* Carrusel continuo: la lista se repite dos veces para que el loop no tenga cortes. Se pausa al pasar el mouse. */}
-      <div className="group mt-12 motion-reduce:overflow-x-auto lg:mt-[6.25rem]">
+      <div {...reveal} className="group mt-12 motion-reduce:overflow-x-auto lg:mt-[6.25rem]">
         <ul className="flex w-max animate-marquee pb-12 group-hover:[animation-play-state:paused] motion-reduce:animate-none lg:pb-[2.6875rem]">
           {testimonios.map((t) => (
             <Tarjeta key={t.nombre} t={t} />

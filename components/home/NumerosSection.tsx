@@ -1,13 +1,21 @@
+import CountUp from "@/components/ui/CountUp";
+import { reveal } from "@/components/ui/reveal";
+
+// El año cuenta desde 1990 para que se lea como años que pasan (desde 0 parece una cantidad).
+// TODO: el cliente tiene que elegir entre las variantes de /demo-anio; después borrar esa página.
 const numeros = [
-  { label: "Cuidando familias desde", valor: "2002" },
-  { label: "Beneficiarios", valor: "+60.000" },
-  { label: "Horas de servicio al mes", valor: "+45.000" },
+  { label: "Cuidando familias desde", conteo: { to: 2002, from: 1990, agrupar: false } },
+  { label: "Beneficiarios", conteo: { to: 60000, prefix: "+" } },
+  { label: "Horas de servicio al mes", conteo: { to: 45000, prefix: "+" } },
 ];
 
 export default function NumerosSection() {
   return (
     <section aria-labelledby="numeros-titulo" className="container-site pt-16 lg:pt-[5.875rem]">
-      <div className="rounded-[2.5rem] bg-gradient-plum px-6 py-12 text-center text-white shadow-card lg:rounded-[2.5625rem] lg:px-[3.75rem] lg:pt-[3.8125rem] lg:pb-[4.3125rem]">
+      <div
+        {...reveal}
+        className="rounded-[2.5rem] bg-gradient-plum px-6 py-12 text-center text-white shadow-card lg:rounded-[2.5625rem] lg:px-[3.75rem] lg:pt-[3.8125rem] lg:pb-[4.3125rem]"
+      >
         <h2 id="numeros-titulo" className="font-serif text-h2 lg:leading-[1.22]">
           Los números hablan por <strong className="font-extrabold">nosotros</strong>
         </h2>
@@ -27,7 +35,9 @@ export default function NumerosSection() {
                 />
               )}
               <dt className="text-body font-semibold text-[#fbf8fc]">{n.label}</dt>
-              <dd className="text-stat">{n.valor}</dd>
+              <dd className="text-stat">
+                <CountUp {...n.conteo} />
+              </dd>
             </div>
           ))}
         </dl>

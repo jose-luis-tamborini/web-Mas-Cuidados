@@ -1,4 +1,5 @@
 import Image, { type StaticImageData } from "next/image";
+import { reveal } from "@/components/ui/reveal";
 
 // Banner con foto y panel violeta ("¿Necesitás asesoramiento?"). Se usa en Home, Seguros y Medicina online.
 
@@ -25,6 +26,7 @@ export default function AsesoramientoBanner({
 }: Props) {
   return (
     <div
+      {...reveal}
       className={`grid overflow-hidden rounded-[2.875rem] bg-gradient-night shadow-card md:grid-cols-2 lg:h-[29.5625rem] ${
         imagenALaDerecha ? "lg:grid-cols-[1fr_50rem]" : "lg:grid-cols-[50rem_1fr]"
       }`}

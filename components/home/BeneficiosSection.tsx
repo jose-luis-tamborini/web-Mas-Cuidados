@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Eyebrow from "@/components/ui/Eyebrow";
+import { reveal } from "@/components/ui/reveal";
 import santander from "@/public/images/bancos/santander.png";
 import galicia from "@/public/images/bancos/galicia.png";
 import macro from "@/public/images/bancos/macro.png";
@@ -16,19 +17,19 @@ const bancos = [
 export default function BeneficiosSection() {
   return (
     <section aria-labelledby="beneficios-titulo" className="container-site py-20 lg:pt-[13.9375rem] lg:pb-[14rem]">
-      <div className="flex flex-col items-center text-center">
+      <div {...reveal} className="flex flex-col items-center text-center">
         <Eyebrow>Convenios vigentes</Eyebrow>
         <h2 id="beneficios-titulo" className="mt-1 font-serif text-h1 font-semibold lg:mt-0">
           Beneficios bancarios para afiliados
         </h2>
       </div>
       <ul className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 lg:mt-[5.125rem] lg:grid-cols-[repeat(4,17.1875rem)] lg:justify-between lg:gap-0">
+        {/* Aparecen una tras otra, las cruza un brillo y se elevan al pasar el mouse */}
         {bancos.map((b) => (
-          <li
-            key={b.nombre}
-            className="flex aspect-[275/114] items-center justify-center rounded-[1.875rem] bg-gradient-plum shadow-card"
-          >
-            <Image src={b.logo} alt={b.nombre} sizes="230px" className={`h-auto ${b.ancho}`} />
+          <li key={b.nombre} {...reveal}>
+            <div className="shine flex aspect-[275/114] items-center justify-center rounded-[1.875rem] bg-gradient-plum shadow-card transition-[translate,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-panel motion-reduce:transition-none">
+              <Image src={b.logo} alt={b.nombre} sizes="230px" className={`h-auto ${b.ancho}`} />
+            </div>
           </li>
         ))}
       </ul>

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Eyebrow from "@/components/ui/Eyebrow";
+import MobileAccordion from "@/components/ui/MobileAccordion";
+import { reveal } from "@/components/ui/reveal";
 import { sedes, type Sede } from "@/lib/site";
 import mapa from "@/public/images/home/mapa-argentina.png";
 import rosario from "@/public/images/sedes/rosario.png";
@@ -19,7 +21,7 @@ export default function SedesSection() {
     <section aria-labelledby="sedes-titulo" className="container-site pt-20 pb-24 lg:pt-[11.0625rem] lg:pb-[9.125rem]">
       <div className="grid items-center gap-12 lg:grid-cols-[54.6875rem_1fr] lg:items-start lg:gap-0">
         <div>
-          <div className="flex flex-col items-center text-center">
+          <div {...reveal} className="flex flex-col items-center text-center">
             <Eyebrow>Presencia nacional</Eyebrow>
             <h2 id="sedes-titulo" className="mt-1 font-serif text-h1 font-semibold lg:-mt-[0.1rem]">
               Sedes en todo el país
@@ -29,39 +31,47 @@ export default function SedesSection() {
             </p>
           </div>
 
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-[2.75rem] lg:grid-cols-[repeat(2,25.3125rem)] lg:gap-x-[4.0625rem] lg:gap-y-[3.8125rem]">
+          {/* Mobile: cada sede se despliega con la dirección y el link a Maps. */}
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 sm:items-start lg:mt-[2.75rem] lg:grid-cols-[repeat(2,25.3125rem)] lg:items-stretch lg:gap-x-[4.0625rem] lg:gap-y-[3.8125rem]">
             {sedes.map((sede) => (
               <li
                 key={sede.nombre}
-                className="flex gap-4 rounded-[2.75rem] bg-white p-6 text-brand-deep shadow-card lg:min-h-[18.0625rem] lg:gap-[1.3rem] lg:pt-[1.3125rem] lg:pr-[1rem] lg:pb-[1.6875rem] lg:pl-[2.125rem]"
+                {...reveal}
+                className="flex gap-4 rounded-[1.75rem] bg-white px-5 py-3 text-brand-deep shadow-card lg:min-h-[18.0625rem] lg:gap-[1.3rem] lg:rounded-[2.75rem] lg:pt-[1.3125rem] lg:pr-[1rem] lg:pb-[1.6875rem] lg:pl-[2.125rem]"
               >
                 <Image
                   src={iconos[sede.icono]}
                   alt=""
                   sizes="112px"
-                  className="size-16 shrink-0 lg:mt-[0.3125rem] lg:size-[6.75rem]"
+                  className="size-12 shrink-0 lg:mt-[0.3125rem] lg:size-[6.75rem]"
                 />
-                <div className="flex flex-col">
-                  <h3 className="text-[1.375rem] leading-tight font-semibold lg:text-[1.75rem] lg:leading-[1.22]">
-                    {sede.nombre}
-                  </h3>
-                  <address className="mt-3 text-body leading-[1.635] not-italic lg:mt-[1.125rem]">
-                    <strong className="font-semibold">Oficinas</strong>
-                    {sede.direccion.map((linea) => (
-                      <span key={linea} className="block">
-                        {linea}
-                      </span>
-                    ))}
-                    <strong className="font-semibold">{sede.ciudad}</strong>
-                  </address>
-                  <a
-                    href={sede.mapsHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-auto pt-5 text-body leading-[1.22] hover:underline"
+                <div className="flex flex-1 flex-col">
+                  <MobileAccordion
+                    trigger={<span className="text-[1.375rem] leading-tight font-semibold">{sede.nombre}</span>}
+                    triggerClassName="min-h-12"
+                    className="lg:flex-1"
                   >
-                    Encontranos en <strong className="font-semibold">Maps</strong>
-                  </a>
+                    <div className="flex h-full flex-col pb-2 lg:pb-0">
+                      <h3 className="text-[1.75rem] leading-[1.22] font-semibold max-lg:hidden">{sede.nombre}</h3>
+                      <address className="text-body leading-[1.635] not-italic lg:mt-[1.125rem]">
+                        <strong className="font-semibold">Oficinas</strong>
+                        {sede.direccion.map((linea) => (
+                          <span key={linea} className="block">
+                            {linea}
+                          </span>
+                        ))}
+                        <strong className="font-semibold">{sede.ciudad}</strong>
+                      </address>
+                      <a
+                        href={sede.mapsHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-auto pt-4 text-body leading-[1.22] hover:underline lg:pt-5"
+                      >
+                        Encontranos en <strong className="font-semibold">Maps</strong>
+                      </a>
+                    </div>
+                  </MobileAccordion>
                 </div>
               </li>
             ))}
@@ -69,6 +79,7 @@ export default function SedesSection() {
         </div>
 
         <Image
+          {...reveal}
           src={mapa}
           alt="Mapa de Argentina con las sedes de Más Cuidados"
           sizes="(min-width: 1024px) 23vw, 40vw"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { reveal } from "@/components/ui/reveal";
 
 // Formulario "Solicitá un Asesor de Servicios Ahora". Está en todas las páginas del diseño.
 // TODO: falta definir a dónde llegan las consultas (mail, CRM) y si se usa la versión corta del formulario.
@@ -67,7 +68,9 @@ export default function ContactoSection() {
       className="bg-mist py-14 shadow-[0_0_0_0.8px_rgb(179_136_255/0.15),0_6.5px_32.5px_rgb(0_0_0/0.35),0_3.2px_17px_rgb(0_0_0/0.25)] lg:pt-[3.8125rem] lg:pb-[6.6875rem]"
     >
       <div className="container-site">
-        <div className="rounded-[2.875rem] bg-[#421c62]/[0.08] px-5 py-10 shadow-[0_3.8px_20px_3.8px_rgb(0_0_0/0.25)] sm:px-10 lg:mx-[0.625rem] lg:px-0 lg:pt-[1.625rem] lg:pb-[1.4375rem]">
+        <div
+          {...reveal}
+          className="rounded-[2.875rem] bg-[#421c62]/[0.08] px-5 py-10 shadow-[0_3.8px_20px_3.8px_rgb(0_0_0/0.25)] sm:px-10 lg:mx-[0.625rem] lg:px-0 lg:pt-[1.625rem] lg:pb-[1.4375rem]">
           <div className="mx-auto max-w-[56.0625rem]">
             <h2 id="contacto-titulo" className="font-serif text-[1.75rem] leading-snug font-semibold lg:text-[2.39rem] lg:leading-[1.33]">
               Solicitá un Asesor de Servicios Ahora
