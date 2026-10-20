@@ -15,7 +15,10 @@ const formatear = (n: number, agrupar: boolean) => n.toLocaleString("es-AR", { u
 
 // Número que cuenta de `from` a `to` cuando entra en pantalla. El HTML ya trae el valor final (es lo que
 // se ve sin JS o con "reducir movimiento") y los lectores de pantalla leen siempre ese valor.
-export default function CountUp({ to, from = 0, prefix = "", agrupar = true, duracion = 1800 }: Props) {
+// Demora antes de contar, para que la tarjeta termine de aparecer.
+const DEMORA = 500;
+
+export default function CountUp({ to, from = 0, prefix = "", agrupar = true, duracion = 3000 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -28,17 +31,20 @@ export default function CountUp({ to, from = 0, prefix = "", agrupar = true, dur
     mostrar(from);
 
     let frame = 0;
+    let espera = 0;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         io.disconnect();
-        const inicio = performance.now();
-        const paso = (ahora: number) => {
-          const t = Math.min((ahora - inicio) / duracion, 1);
-          mostrar(Math.round(from + (to - from) * (1 - (1 - t) ** 3)));
-          if (t < 1) frame = requestAnimationFrame(paso);
-        };
-        frame = requestAnimationFrame(paso);
+        espera = window.setTimeout(() => {
+          const inicio = performance.now();
+          const paso = (ahora: number) => {
+            const t = Math.min((ahora - inicio) / duracion, 1);
+            mostrar(Math.round(from + (to - from) * (1 - (1 - t) ** 3)));
+            if (t < 1) frame = requestAnimationFrame(paso);
+          };
+          frame = requestAnimationFrame(paso);
+        }, DEMORA);
       },
       { threshold: 0.6 },
     );
@@ -46,6 +52,7 @@ export default function CountUp({ to, from = 0, prefix = "", agrupar = true, dur
 
     return () => {
       io.disconnect();
+      clearTimeout(espera);
       cancelAnimationFrame(frame);
       mostrar(to);
     };
