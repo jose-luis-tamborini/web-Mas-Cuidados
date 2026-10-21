@@ -58,19 +58,33 @@ function Campo({ id, label, children }: { id: string; label: string; children: R
   );
 }
 
-export default function ContactoSection() {
+// "home": franja gris con sombra, como en la Home. "pagina": sobre el fondo crema y a lo ancho del contenido
+// de las páginas interiores (1697 px del diseño).
+const variantes = {
+  home: {
+    section:
+      "bg-mist py-14 shadow-[0_0_0_0.8px_rgb(179_136_255/0.15),0_6.5px_32.5px_rgb(0_0_0/0.35),0_3.2px_17px_rgb(0_0_0/0.25)] lg:pt-[3.8125rem] lg:pb-[6.6875rem]",
+    container: "container-site",
+    card: "lg:mx-[0.625rem]",
+  },
+  pagina: {
+    section: "py-14 lg:pt-[7.375rem] lg:pb-[7.1875rem]",
+    container: "container-wide",
+    card: "",
+  },
+};
+
+export default function ContactoSection({ variante = "home" }: { variante?: keyof typeof variantes }) {
   const [aviso, setAviso] = useState(false);
+  const v = variantes[variante];
 
   return (
-    <section
-      id="contacto"
-      aria-labelledby="contacto-titulo"
-      className="bg-mist py-14 shadow-[0_0_0_0.8px_rgb(179_136_255/0.15),0_6.5px_32.5px_rgb(0_0_0/0.35),0_3.2px_17px_rgb(0_0_0/0.25)] lg:pt-[3.8125rem] lg:pb-[6.6875rem]"
-    >
-      <div className="container-site">
+    <section id="contacto" aria-labelledby="contacto-titulo" className={v.section}>
+      <div className={v.container}>
         <div
           {...reveal}
-          className="rounded-[2.875rem] bg-[#421c62]/[0.08] px-5 py-10 shadow-[0_3.8px_20px_3.8px_rgb(0_0_0/0.25)] sm:px-10 lg:mx-[0.625rem] lg:px-0 lg:pt-[1.625rem] lg:pb-[1.4375rem]">
+          className={`rounded-[2.875rem] bg-[#421c62]/[0.08] px-5 py-10 shadow-[0_3.8px_20px_3.8px_rgb(0_0_0/0.25)] sm:px-10 lg:px-0 lg:pt-[1.625rem] lg:pb-[1.4375rem] ${v.card}`}
+        >
           <div className="mx-auto max-w-[56.0625rem]">
             <h2 id="contacto-titulo" className="font-serif text-[1.75rem] leading-snug font-semibold lg:text-[2.39rem] lg:leading-[1.33]">
               Solicitá un Asesor de Servicios Ahora
