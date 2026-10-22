@@ -2,6 +2,22 @@ import Image, { type StaticImageData } from "next/image";
 import { reveal } from "@/components/ui/reveal";
 
 // Banner con foto y panel violeta ("¿Necesitás asesoramiento?"). Se usa en Home, Seguros y Medicina online.
+// "orientacion" (Medicina online): título más grande, texto centrado y botón blanco más chico, como en ese Figma.
+
+const variantes = {
+  asesoramiento: {
+    panel: "lg:pt-[3.5625rem]",
+    titulo: "text-h3 lg:mt-[2.3125rem]",
+    texto: "lg:mt-[3rem] lg:w-full lg:max-w-[38.5rem] lg:text-left lg:text-base lg:leading-[2.375]",
+    cta: "bg-white/30 text-subtitle hover:bg-white/40 lg:mt-[3.125rem] lg:h-[4.5625rem] lg:w-[25.6875rem]",
+  },
+  orientacion: {
+    panel: "lg:pt-[4.6875rem]",
+    titulo: "text-h2 lg:mt-[1.6875rem]",
+    texto: "lg:mt-[1.5625rem] lg:text-[1.125rem] lg:leading-[2.375rem]",
+    cta: "bg-white text-lead text-brand-deep hover:bg-white/90 lg:mt-[3.6875rem] lg:h-[4rem] lg:w-[19.125rem]",
+  },
+};
 
 type Props = {
   imagen: StaticImageData;
@@ -12,6 +28,7 @@ type Props = {
   cta: React.ReactNode;
   href: string;
   imagenALaDerecha?: boolean;
+  variante?: keyof typeof variantes;
 };
 
 export default function AsesoramientoBanner({
@@ -23,7 +40,9 @@ export default function AsesoramientoBanner({
   cta,
   href,
   imagenALaDerecha = false,
+  variante = "asesoramiento",
 }: Props) {
+  const v = variantes[variante];
   return (
     <div
       {...reveal}
@@ -34,20 +53,20 @@ export default function AsesoramientoBanner({
       <div className={`relative aspect-[800/473] md:aspect-auto md:min-h-[24rem] lg:min-h-0 ${imagenALaDerecha ? "md:order-2" : ""}`}>
         <Image src={imagen} alt={imagenAlt} fill sizes="(min-width: 768px) 42vw, 100vw" className="object-cover" />
       </div>
-      <div className="flex flex-col items-center justify-center px-6 py-10 text-center text-white lg:justify-start lg:px-[2rem] lg:pt-[3.5625rem] lg:pb-0">
+      <div className={`flex flex-col items-center justify-center px-6 py-10 text-center text-white lg:justify-start lg:px-[2rem] lg:pb-0 ${v.panel}`}>
         {eyebrow && (
           <p className="flex items-center gap-2 text-sm lg:gap-[0.375rem] lg:text-[1.125rem] lg:leading-[1.22]">
             <span aria-hidden="true" className="h-0.5 w-2 bg-white lg:w-[0.4375rem]" />
             {eyebrow}
           </p>
         )}
-        <h2 className="mt-4 font-serif text-h3 lg:mt-[2.3125rem]">{titulo}</h2>
-        <div className="mt-5 text-sm leading-[2.4] lg:mt-[3rem] lg:w-full lg:max-w-[38.5rem] lg:text-left lg:text-base lg:leading-[2.375]">
+        <h2 className={`mt-4 font-serif ${v.titulo}`}>{titulo}</h2>
+        <div className={`mt-5 text-sm leading-[2.4] ${v.texto}`}>
           {texto}
         </div>
         <a
           href={href}
-          className="mt-6 inline-flex h-14 items-center justify-center rounded-[0.9375rem] bg-white/30 px-3 text-subtitle shadow-card transition-colors hover:bg-white/40 lg:mt-[3.125rem] lg:h-[4.5625rem] lg:w-[25.6875rem] lg:px-0"
+          className={`mt-6 inline-flex h-14 items-center justify-center rounded-[0.9375rem] px-3 shadow-card transition-colors lg:px-0 ${v.cta}`}
         >
           {/* El span evita que el flex del botón se coma el espacio antes del texto en negrita */}
           <span>{cta}</span>
