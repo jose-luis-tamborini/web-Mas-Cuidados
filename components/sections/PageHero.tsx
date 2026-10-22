@@ -15,9 +15,19 @@ type Props = {
   siguiente: string;
   /** Encuadre de la foto en mobile, donde se recorta de costado (ej. "object-[60%_50%]"). */
   imagenClassName?: string;
+  /** Grosor y espaciado del título: cambian según la página. */
+  tituloClassName?: string;
 };
 
-export default function PageHero({ imagen, titulo, subtitulo, children, siguiente, imagenClassName = "" }: Props) {
+export default function PageHero({
+  imagen,
+  titulo,
+  subtitulo,
+  children,
+  siguiente,
+  imagenClassName = "",
+  tituloClassName = "font-medium tracking-[0.125em]",
+}: Props) {
   return (
     <section className="relative isolate flex min-h-[32rem] items-center overflow-hidden bg-brand-ink pt-16 text-white lg:h-[69.375rem] lg:min-h-0 lg:items-start lg:pt-0">
       <Image src={imagen} alt="" fill preload sizes="100vw" className={`-z-20 object-cover lg:object-center ${imagenClassName}`} />
@@ -27,7 +37,9 @@ export default function PageHero({ imagen, titulo, subtitulo, children, siguient
         <div className="flex items-start gap-3 lg:gap-[1.125rem]">
           <LogoCruzIcon className="size-10 shrink-0 lg:size-[4.875rem]" />
           <div className="pt-1 lg:pt-[0.5625rem]">
-            <h1 className="text-[1.5rem] leading-tight font-medium tracking-[0.125em] uppercase lg:text-[3rem] lg:leading-[1.219] [&_strong]:font-semibold">
+            <h1
+              className={`text-[1.5rem] leading-tight uppercase lg:text-[3rem] lg:leading-[1.219] [&_strong]:font-semibold ${tituloClassName}`}
+            >
               {titulo}
             </h1>
             {subtitulo && (

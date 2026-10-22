@@ -58,15 +58,13 @@ function Campo({ id, label, children }: { id: string; label: string; children: R
   );
 }
 
-// "home": franja gris con sombra, como en la Home. "pagina": sobre el fondo crema y a lo ancho del contenido
-// de las páginas interiores (1697 px del diseño).
+// "home": franja gris con sombra, como en la Home. "franja": la misma franja con la tarjeta 8 px más abajo
+// (Seguros). "pagina": sobre el fondo crema y a lo ancho del contenido de las páginas interiores (1697 px).
+const franja =
+  "bg-mist py-14 shadow-[0_0_0_0.8px_rgb(179_136_255/0.15),0_6.5px_32.5px_rgb(0_0_0/0.35),0_3.2px_17px_rgb(0_0_0/0.25)] lg:pb-[6.6875rem]";
 const variantes = {
-  home: {
-    section:
-      "bg-mist py-14 shadow-[0_0_0_0.8px_rgb(179_136_255/0.15),0_6.5px_32.5px_rgb(0_0_0/0.35),0_3.2px_17px_rgb(0_0_0/0.25)] lg:pt-[3.8125rem] lg:pb-[6.6875rem]",
-    container: "container-site",
-    card: "lg:mx-[0.625rem]",
-  },
+  home: { section: `${franja} lg:pt-[3.8125rem]`, container: "container-site", card: "lg:mx-[0.625rem]" },
+  franja: { section: `${franja} lg:pt-[4.3125rem]`, container: "container-site", card: "lg:mx-[0.625rem]" },
   pagina: {
     section: "py-14 lg:pt-[7.375rem] lg:pb-[7.1875rem]",
     container: "container-wide",
