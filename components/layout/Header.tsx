@@ -12,6 +12,9 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+  // El submenú de desktop se abre con hover/foco (CSS): al elegir una opción se oculta hasta que el mouse sale del
+  // menú o vuelve a entrar el foco, así no queda abierto encima de la página nueva.
+  const [submenuOculto, setSubmenuOculto] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -30,7 +33,12 @@ export default function Header() {
           <ul className="flex items-center gap-[2.125rem] text-[1.25rem] leading-[1.22] text-white">
             {navItems.map((item) =>
               "children" in item ? (
-                <li key={item.label} className="group relative">
+                <li
+                  key={item.label}
+                  className="group relative"
+                  onMouseLeave={() => setSubmenuOculto(false)}
+                  onFocus={() => setSubmenuOculto(false)}
+                >
                   <button
                     type="button"
                     aria-haspopup="true"
@@ -40,12 +48,20 @@ export default function Header() {
                     <ChevronDown className="w-[0.875rem] transition-transform group-focus-within:rotate-180 group-hover:rotate-180" />
                   </button>
                   {/* El padding superior cubre el espacio hasta el menú, así no se cierra al bajar el mouse */}
-                  <div className="invisible absolute top-full -left-[0.6875rem] pt-[3.55rem] opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div
+                    className={`invisible absolute top-full -left-[0.6875rem] pt-[3.55rem] opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 ${
+                      submenuOculto ? "invisible! opacity-0!" : ""
+                    }`}
+                  >
                     <ul className="flex w-[16rem] flex-col gap-[1.5625rem] rounded-[0.625rem] bg-black/[0.67] p-[0.625rem]">
                       {item.children.map((child) => (
                         <li key={child.href}>
                           <Link
                             href={child.href}
+                            onClick={(e) => {
+                              e.currentTarget.blur();
+                              setSubmenuOculto(true);
+                            }}
                             className="block font-semibold text-orchid transition-colors hover:text-white"
                           >
                             {child.label}
