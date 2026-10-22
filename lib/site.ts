@@ -34,6 +34,10 @@ export const redes = {
   web: "/",
 };
 
+// Ficha de Google Maps abierta en la pestaña de opiniones (sin los parámetros de seguimiento del link original).
+export const resenasGoogle =
+  "https://www.google.com/maps/place/M%C3%A1s+Cuidados+-+Cuidado+de+personas+en+sanatorios+y+domicilios.+Enfermer%C3%ADa+a+domicilio.+Internaci%C3%B3n+Domiciliaria/@-32.9446553,-60.6567399,17z/data=!4m8!3m7!1s0x95b7ab405674c245:0x2714a1d03a5537ff!8m2!3d-32.9446598!4d-60.654165!9m1!1b1!16s%2Fg%2F11fz9y4_m0";
+
 const maps = (direccion: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(direccion)}`;
 

@@ -45,16 +45,15 @@ function IconoCuadrado({ Icono, iconoClassName }: Pick<Tarjeta, "Icono" | "icono
 export default function PrestacionesSection() {
   return (
     <section aria-label="Prestaciones incluidas" className="container-wide pt-12 pb-20 lg:pt-[9.0625rem] lg:pb-[7.625rem]">
-      {/* Mobile: desplegables (el primero abierto). Desktop: las tres tarjetas del Figma. */}
+      {/* Mobile: desplegables (cerrados). Desktop: las tres tarjetas del Figma. */}
       <ul className="grid gap-4 lg:grid-cols-[repeat(3,31.6875rem)] lg:justify-center lg:gap-[3.8125rem]">
-        {tarjetas.map((t, i) => (
+        {tarjetas.map((t) => (
           <li
             key={t.titulo}
             {...reveal}
             className="rounded-[1.75rem] bg-lavender px-5 py-2 text-brand shadow-card lg:h-[32.25rem] lg:rounded-[2.875rem] lg:p-0"
           >
             <MobileAccordion
-              defaultOpen={i === 0}
               triggerClassName="min-h-16 py-2"
               trigger={
                 <span className="flex items-center gap-4">

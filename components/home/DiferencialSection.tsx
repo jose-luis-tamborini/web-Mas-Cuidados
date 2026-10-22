@@ -61,7 +61,7 @@ export default function DiferencialSection() {
         </p>
       </div>
 
-      {/* Mobile: desplegables con la foto de fondo en el título (el primero abierto). Desktop: tarjetas del Figma. */}
+      {/* Mobile: desplegables con la foto de fondo en el título (cerrados). Desktop: tarjetas del Figma. */}
       <ul className="mt-10 flex flex-col gap-4 lg:mt-[2.625rem] lg:gap-[3.75rem]">
         {diferenciales.map((d, i) => {
           const reverse = i % 2 === 1;
@@ -76,7 +76,6 @@ export default function DiferencialSection() {
               }`}
             >
               <MobileAccordion
-                defaultOpen={i === 0}
                 triggerClassName="relative isolate min-h-24 px-5 py-4 text-white"
                 trigger={
                   <>

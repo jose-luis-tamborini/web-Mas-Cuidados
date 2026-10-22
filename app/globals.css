@@ -52,11 +52,11 @@
   --shadow-panel: 0 4px 7.5px 3px rgb(0 0 0 / 0.25);
   --shadow-float: 6px 6px 40px rgb(0 0 0 / 0.25);
 
-  /* Carrusel de testimonios: la lista va duplicada, así que moverla la mitad cierra el loop. */
-  --animate-marquee: marquee 70s linear infinite;
-  @keyframes marquee {
+  /* Reseñas que suben solas: la lista va duplicada, así que moverla la mitad cierra el loop. */
+  --animate-resenas: resenas 80s linear infinite;
+  @keyframes resenas {
     to {
-      transform: translateX(-50%);
+      transform: translateY(-50%);
     }
   }
 

@@ -23,17 +23,16 @@ export default function Footer() {
     <footer className="bg-footer text-white shadow-card">
       <div className="container-site pt-16 lg:min-h-[32.375rem] lg:pt-[9.625rem]">
         <div className="grid gap-12 lg:grid-cols-[35.5rem_1fr] lg:gap-0">
-          <Link href="/" aria-label="Más Cuidados, ir al inicio" className="w-fit lg:mt-[2.0625rem] lg:ml-[0.5625rem]">
+          <Link href="/" aria-label="Más Cuidados, ir al inicio" className="w-fit max-lg:mx-auto lg:mt-[2.0625rem] lg:ml-[0.5625rem]">
             <Image src={logo} alt="Más Cuidados, cuando más nos necesitás" className="w-36 lg:w-[12.25rem]" sizes="196px" />
           </Link>
 
-          {/* Mobile: cada columna es un desplegable (Contacto abierto). */}
+          {/* Mobile: cada columna es un desplegable, todos cerrados. */}
           <div className="grid grid-cols-1 text-base sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-[18.5625rem_17.75rem_12.5rem_auto] lg:gap-0">
             {footerColumns.map((col) => (
               <div key={col.titulo} className="border-t border-white/25 lg:border-0">
                 <MobileAccordion
                   as="p"
-                  defaultOpen={col.titulo === "Contacto"}
                   trigger={<span className="font-semibold">{col.titulo}</span>}
                   triggerClassName="py-4"
                 >
