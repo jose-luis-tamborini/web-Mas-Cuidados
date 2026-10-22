@@ -22,7 +22,7 @@ export default function Seguros() {
             sanatorios, domicilios e instituciones
           </>
         }
-        tituloClassName="font-semibold tracking-[0.08em] lg:tracking-[0.2em]"
+        tituloClassName="font-semibold tracking-[0.08em] lg:text-[3rem] lg:leading-[1.219] lg:tracking-[0.2em]"
         siguiente="contenido"
         imagenClassName="object-[60%_50%]"
       />
