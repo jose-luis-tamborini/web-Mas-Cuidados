@@ -2,7 +2,8 @@ import Image, { type StaticImageData } from "next/image";
 import { ChevronesIcon, LogoCruzIcon } from "@/components/icons";
 
 // Hero de las páginas interiores: foto con velo violeta, cruz del logo, título en mayúsculas espaciadas y
-// flecha para bajar al contenido. En el diseño mide 1110 px de alto y el bloque de texto arranca en x=210.
+// flecha para bajar al contenido. En desktop ocupa el alto de la ventana (pedido del cliente; en el Figma mide 1110 px)
+// y el bloque de texto arranca a la misma proporción que en el diseño (473 / 1110 = 42,6 %), en x=210.
 
 type Props = {
   imagen: StaticImageData;
@@ -29,11 +30,11 @@ export default function PageHero({
   tituloClassName = "font-medium tracking-[0.125em] lg:text-[3rem] lg:leading-[1.219] [&_strong]:font-semibold",
 }: Props) {
   return (
-    <section className="relative isolate flex min-h-[32rem] items-center overflow-hidden bg-brand-ink pt-16 text-white lg:h-[69.375rem] lg:min-h-0 lg:items-start lg:pt-0">
+    <section className="relative isolate flex min-h-[32rem] items-center overflow-hidden bg-brand-ink pt-16 text-white lg:h-svh lg:min-h-[40rem] lg:items-start lg:pt-0">
       <Image src={imagen} alt="" fill preload sizes="100vw" className={`-z-20 object-cover lg:object-center ${imagenClassName}`} />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[#530467]/32" />
 
-      <div className="px-5 pt-10 pb-24 sm:px-10 lg:p-0 lg:pt-[29.5625rem] lg:pl-[13.125rem]">
+      <div className="px-5 pt-10 pb-24 sm:px-10 lg:p-0 lg:pt-[42.6svh] lg:pl-[13.125rem]">
         <div className="flex items-start gap-3 lg:gap-[1.125rem]">
           <LogoCruzIcon className="size-10 shrink-0 lg:size-[4.875rem]" />
           <div className="pt-1 lg:pt-[0.5625rem]">
