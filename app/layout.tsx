@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   },
   description:
     "Soluciones de cuidado, planes de seguros e internación domiciliaria, coordinadas por un solo equipo para acompañar a tu familia en cada etapa. Desde 2002.",
+  // El diseño es solo claro: que Dark Reader no oscurezca la página.
+  other: { "darkreader-lock": "true" },
+};
+
+// Que Chrome y los navegadores con modo oscuro forzado no inviertan los colores.
+export const viewport: Viewport = {
+  colorScheme: "only light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

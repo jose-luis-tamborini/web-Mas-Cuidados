@@ -135,6 +135,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Diseño solo claro: evita que el modo oscuro forzado del navegador invierta los colores */
+    color-scheme: only light;
   }
 
   body {
