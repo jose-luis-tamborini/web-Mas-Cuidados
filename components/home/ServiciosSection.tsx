@@ -29,7 +29,7 @@ const servicios: Servicio[] = [
   },
   {
     titulo: "Seguro de Internación",
-    bajada: "en Sanatorios u Hospitales.",
+    bajada: "en Sanatorios y Domicilios.",
     texto:
       "Planes diseñados para brindar tranquilidad en momentos de internación, recuperación o necesidad de asistencia, con atención profesional y acompañamiento continuo.",
     href: "/seguros-de-cuidado",

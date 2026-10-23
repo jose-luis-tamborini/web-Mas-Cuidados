@@ -140,8 +140,6 @@
   }
 
   body {
-    background: var(--color-cream);
-    color: var(--color-brand);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
@@ -150,6 +148,17 @@
   [id] {
     scroll-margin-top: 6rem;
   }
+}
+
+/*
+  Fondo y color de texto de la página fuera de @layer y con !important: cualquier estilo inyectado sin capa
+  (extensiones o modos oscuros que pisan html/body) le gana a todo lo que está en capas, y dejaba el fondo
+  negro y los títulos sin color propio en blanco o negro según el dispositivo.
+*/
+html,
+body {
+  background-color: var(--color-cream) !important;
+  color: var(--color-brand) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

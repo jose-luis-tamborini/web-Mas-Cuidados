@@ -34,11 +34,11 @@ export default function HeroSection() {
 
       <div className="container-site flex flex-col items-center py-20 text-center lg:py-0">
         <h1 className="max-w-[16ch] font-serif text-display font-semibold lg:max-w-[62.6875rem]">
-          Acompañamos asistimos y cuidamos
+          Acompañamos, asistimos y cuidamos
         </h1>
         <p className="mt-8 max-w-[50ch] text-subtitle lg:mt-[6.6875rem] lg:max-w-[76.1875rem]">
-          Soluciones de cuidado, planes de seguros e internación domiciliaria, coordinadas por un solo equipo para
-          acompañar a tu familia en cada etapa.
+          <span className="font-semibold">Soluciones de cuidado, seguros e internación domiciliaria.</span>{" "}
+          <span className="block lg:mt-[0.5rem]">Un solo equipo para acompañar a tu familia en cada etapa.</span>
         </p>
         <a
           href="#contacto"
