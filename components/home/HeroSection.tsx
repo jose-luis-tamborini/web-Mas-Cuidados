@@ -38,7 +38,7 @@ export default function HeroSection() {
         </h1>
         <p className="mt-8 max-w-[50ch] text-subtitle lg:mt-[6.6875rem] lg:max-w-[76.1875rem]">
           <span className="font-semibold">Soluciones de cuidado, seguros e internación domiciliaria.</span>{" "}
-          <span className="block lg:mt-[0.5rem]">Un solo equipo para acompañar a tu familia en cada etapa.</span>
+          <span className="mt-3 block lg:mt-[0.5rem]">Un solo equipo para acompañar a tu familia en cada etapa.</span>
         </p>
         <a
           href="#contacto"

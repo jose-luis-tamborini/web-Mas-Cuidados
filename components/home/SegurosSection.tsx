@@ -18,7 +18,8 @@ export default function SegurosSection() {
             className="object-cover"
           />
         </div>
-        <div {...reveal}>
+        {/* En mobile va centrado (pedido del cliente); en desktop, alineado a la izquierda junto a la foto. */}
+        <div {...reveal} className="max-lg:text-center">
           <Eyebrow>Seguros de planes de cuidados</Eyebrow>
           <h2 id="seguros-titulo" className="mt-4 max-w-[51.6875rem] font-serif text-h4 font-semibold lg:mt-[1rem]">
             Con una cuota mensual accesible, tu familia accede a cuidado en sanatorios, domicilio e instituciones
@@ -26,7 +27,7 @@ export default function SegurosSection() {
           <CheckList
             variant="soft"
             iconClassName="lg:size-[2.0625rem]"
-            className="mt-8 text-lead lg:mt-[3rem] lg:leading-[2.32]"
+            className="mt-8 text-lead max-lg:mx-auto max-lg:max-w-[19rem] max-lg:text-left lg:mt-[3rem] lg:leading-[2.32]"
             items={[
               "Atención dentro de las 24 hs de solicitud",
               "Cuidado experto y respuesta inmediata",

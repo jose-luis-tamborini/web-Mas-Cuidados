@@ -65,6 +65,8 @@ const franja =
 const variantes = {
   home: { section: `${franja} lg:pt-[3.8125rem]`, container: "container-site", card: "lg:mx-[0.625rem]" },
   franja: { section: `${franja} lg:pt-[4.3125rem]`, container: "container-site", card: "lg:mx-[0.625rem]" },
+  // Quiénes somos: la tarjeta más abajo (99 px del diseño) y al ancho del contenido de la página (1412 px).
+  angosta: { section: `${franja} lg:pt-[6.1875rem]`, container: "container-site", card: "lg:mx-auto lg:max-w-[88.25rem]" },
   pagina: {
     section: "py-14 lg:pt-[7.375rem] lg:pb-[7.1875rem]",
     container: "container-wide",

@@ -86,10 +86,10 @@ export default function DiferencialSection() {
                 }
                 className={`lg:self-center ${reverse ? "lg:order-2 lg:pl-[3.3rem]" : "lg:pl-[1.375rem]"}`}
               >
-                <div className="px-5 pt-5 pb-6 text-center lg:p-0">
+                <div className="px-5 pt-5 pb-6 lg:p-0">
                   <h3 className="text-title font-extrabold tracking-[0.0625rem] uppercase max-lg:hidden">{d.titulo}</h3>
-                  <p className="mx-auto max-w-[43.75rem] text-body leading-[1.7] lg:mt-[1.625rem]">{d.texto}</p>
-                  <CheckList items={d.items} className="mx-auto mt-4 w-fit text-left text-body lg:mt-[0.5625rem] lg:leading-[2.6]" />
+                  <p className="max-w-[43.75rem] text-body leading-[1.7] lg:mt-[1.625rem]">{d.texto}</p>
+                  <CheckList items={d.items} className="mt-4 text-body lg:mt-[0.5625rem] lg:leading-[2.6]" />
                   <Link
                     href={d.href}
                     className="mt-6 inline-block rounded-[0.3125rem] border border-brand px-2 text-lg leading-[1.5] font-semibold transition-colors hover:bg-brand hover:text-white lg:mt-[1rem] lg:px-[0.5625rem] lg:text-[1.125rem]"
