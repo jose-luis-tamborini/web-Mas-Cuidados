@@ -22,16 +22,13 @@ export const navItems: NavItem[] = [
 export const contacto = {
   telefono: "0800 345 2260",
   telefonoHref: "tel:08003452260",
-  // TODO: falta el número de WhatsApp del cliente. Mientras tanto el botón lleva al formulario.
-  whatsappHref: "/contacto",
+  whatsappHref: "https://wa.me/5491126477771",
 };
 
-// TODO: faltan las URLs reales de las redes.
 export const redes = {
-  linkedin: "#",
-  facebook: "#",
-  instagram: "#",
-  web: "/",
+  linkedin: "https://www.linkedin.com/company/mascuidados/",
+  facebook: "https://www.facebook.com/mascuidadossiempre",
+  instagram: "https://www.instagram.com/mascuidados.arg/",
 };
 
 // Ficha de Google Maps abierta en la pestaña de opiniones (sin los parámetros de seguimiento del link original).

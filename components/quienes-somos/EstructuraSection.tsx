@@ -1,8 +1,19 @@
-import Image from "next/image";
 import Eyebrow from "@/components/ui/Eyebrow";
 import MobileAccordion from "@/components/ui/MobileAccordion";
 import { reveal } from "@/components/ui/reveal";
+import FotosCarrusel from "./FotosCarrusel";
 import estructura from "@/public/images/quienes-somos/estructura.jpg";
+import recepcion from "@/public/images/quienes-somos/equipo-2.jpg";
+import coordinacion from "@/public/images/quienes-somos/equipo-3.jpg";
+import supervision from "@/public/images/quienes-somos/equipo-4.jpg";
+
+// Fotos del equipo que mandó el cliente. La primera es la del Figma.
+const fotos = [
+  { src: estructura, alt: "Equipo de Más Cuidados trabajando en la oficina", posicion: "object-[50%_25%] lg:object-center" },
+  { src: recepcion, alt: "Equipo de Más Cuidados en la recepción de la oficina", posicion: "object-[50%_70%]" },
+  { src: coordinacion, alt: "Equipo de coordinación de Más Cuidados revisando una computadora", posicion: "object-[60%_50%]" },
+  { src: supervision, alt: "Coordinadoras de Más Cuidados trabajando juntas en un escritorio", posicion: "object-[50%_40%]" },
+];
 
 const recursos = [
   { titulo: "Alcance Nacional y Sedes:", texto: "Contamos con 4 sedes estratégicas." },
@@ -25,7 +36,7 @@ const recursos = [
   },
 ];
 
-// Tarjeta lila con la foto del equipo a la izquierda y la presentación a la derecha. En mobile la lista de
+// Tarjeta lila con el carrusel de fotos del equipo a la izquierda y la presentación a la derecha. En mobile la lista de
 // recursos va en un desplegable.
 export default function EstructuraSection() {
   return (
@@ -42,13 +53,7 @@ export default function EstructuraSection() {
         className="mt-10 rounded-[1.75rem] bg-lavender p-4 text-[#3d044b] lg:mx-auto lg:mt-[2.625rem] lg:grid lg:w-[88.5rem] lg:grid-cols-[41.875rem_1fr] lg:gap-[2.3125rem] lg:rounded-[1.875rem] lg:py-[1.875rem] lg:pr-[2.4375rem] lg:pl-[2.375rem]"
       >
         <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] lg:aspect-auto lg:h-[47.0625rem] lg:rounded-[3.25rem]">
-          <Image
-            src={estructura}
-            alt="Equipo de Más Cuidados trabajando en la oficina"
-            fill
-            sizes="(min-width: 1024px) 35vw, 100vw"
-            className="object-cover object-[50%_25%] lg:object-center"
-          />
+          <FotosCarrusel fotos={fotos} sizes="(min-width: 1024px) 35vw, 100vw" />
         </div>
         <div className="px-1 pt-5 text-body leading-[1.6] lg:p-0 lg:pt-[2.1875rem] lg:text-[1.25rem] lg:leading-[1.68rem] [&_strong]:font-semibold">
           <p>

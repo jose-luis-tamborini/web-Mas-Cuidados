@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { reveal } from "@/components/ui/reveal";
+import { contacto } from "@/lib/site";
 
 // Formulario "Solicitá un Asesor de Servicios Ahora". Está en todas las páginas del diseño.
-// TODO: falta definir a dónde llegan las consultas (mail, CRM) y si se usa la versión corta del formulario.
+// Las consultas llegan por mail (app/api/contacto/route.ts), a las mismas casillas que la landing anterior.
 
 const servicios = [
   "Servicio particular en domicilio",
@@ -75,7 +76,7 @@ const variantes = {
 };
 
 export default function ContactoSection({ variante = "home" }: { variante?: keyof typeof variantes }) {
-  const [aviso, setAviso] = useState(false);
+  const [estado, setEstado] = useState<"listo" | "enviando" | "enviado" | "error">("listo");
   const v = variantes[variante];
 
   return (
@@ -97,11 +98,26 @@ export default function ContactoSection({ variante = "home" }: { variante?: keyo
 
             <form
               className="mt-6 grid gap-x-9 gap-y-5 sm:grid-cols-2 lg:mt-[3.1875rem] lg:gap-x-[2.3125rem] lg:gap-y-[2.375rem]"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                setAviso(true);
+                const form = e.currentTarget;
+                setEstado("enviando");
+                try {
+                  const res = await fetch("/api/contacto", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), pagina: window.location.pathname }),
+                  });
+                  if (!res.ok) throw new Error(String(res.status));
+                  form.reset();
+                  setEstado("enviado");
+                } catch {
+                  setEstado("error");
+                }
               }}
             >
+              {/* Campo trampa para bots: oculto para las personas y para los lectores de pantalla */}
+              <input type="text" name="sitio" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <Campo id="nombre" label="Nombre">
                 <input id="nombre" name="nombre" placeholder="Nombre" autoComplete="given-name" required className={inputClass} />
               </Campo>
@@ -154,16 +170,24 @@ export default function ContactoSection({ variante = "home" }: { variante?: keyo
                   </label>
                   <button
                     type="submit"
-                    className="mt-2 self-end rounded-full bg-brand/55 px-7 py-3 text-[0.97rem] font-bold tracking-[0.016em] text-mist uppercase shadow-[4.7px_4.7px_31px_rgb(0_0_0/0.25)] transition-colors hover:bg-brand lg:mt-[2.25rem] lg:flex lg:h-[3.6875rem] lg:w-[19.375rem] lg:items-center lg:justify-center lg:px-0 lg:py-0"
+                    disabled={estado === "enviando"}
+                    className="mt-2 self-end rounded-full bg-brand/55 px-7 py-3 text-[0.97rem] font-bold tracking-[0.016em] text-mist uppercase shadow-[4.7px_4.7px_31px_rgb(0_0_0/0.25)] transition-colors hover:bg-brand disabled:cursor-wait disabled:opacity-70 lg:mt-[2.25rem] lg:flex lg:h-[3.6875rem] lg:w-[19.375rem] lg:items-center lg:justify-center lg:px-0 lg:py-0"
                   >
-                    Quiero que me contacten.
+                    {estado === "enviando" ? "Enviando…" : "Quiero que me contacten."}
                   </button>
                 </div>
-                {aviso && (
-                  <p role="status" className="mt-3 text-right text-sm">
-                    El envío del formulario se conecta en la próxima etapa.
-                  </p>
-                )}
+                <p role="status" className="mt-3 text-right text-base font-semibold lg:text-[1.125rem]">
+                  {estado === "enviado" && "¡Gracias! Recibimos tu consulta y un asesor se va a comunicar con vos a la brevedad."}
+                  {estado === "error" && (
+                    <>
+                      No pudimos enviar la consulta. Probá de nuevo o llamanos al{" "}
+                      <a href={contacto.telefonoHref} className="underline">
+                        {contacto.telefono}
+                      </a>
+                      .
+                    </>
+                  )}
+                </p>
               </div>
             </form>
           </div>

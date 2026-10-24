@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedin, FaSquareFacebook } from "react-icons/fa6";
-import { GlobeIcon, InstagramIcon } from "@/components/icons";
+import { InstagramIcon } from "@/components/icons";
 import MobileAccordion from "@/components/ui/MobileAccordion";
 import { footerColumns, redes } from "@/lib/site";
 import logo from "@/public/brand/logo-vertical.png";
@@ -15,7 +15,6 @@ const redesSociales = [
   { label: "LinkedIn", href: redes.linkedin, Icon: FaLinkedin, size: sizeFontAwesome },
   { label: "Facebook", href: redes.facebook, Icon: FaSquareFacebook, size: sizeFontAwesome },
   { label: "Instagram", href: redes.instagram, Icon: InstagramIcon, size: sizeFigma },
-  { label: "Sitio web", href: redes.web, Icon: GlobeIcon, size: sizeFigma },
 ];
 
 export default function Footer() {
@@ -66,7 +65,7 @@ export default function Footer() {
                       <ul className="mt-4 flex items-center gap-3 lg:mt-[1.125rem] lg:gap-[0.875rem]">
                         {redesSociales.map(({ label, href, Icon, size }) => (
                           <li key={label}>
-                            <a href={href} aria-label={label} className="block transition-opacity hover:opacity-80">
+                            <a href={href} aria-label={label} target="_blank" rel="noopener noreferrer" className="block transition-opacity hover:opacity-80">
                               <Icon aria-hidden="true" className={size} />
                             </a>
                           </li>

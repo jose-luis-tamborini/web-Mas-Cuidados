@@ -36,7 +36,7 @@ Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@t
 "Desde 2002" y 4 sedes (Rosario, Córdoba, Buenos Aires, Santa Fe; Paraná cerró). El Figma tiene datos viejos que hay que corregir al maquetar: "16 años de trayectoria" en Quiénes somos (usar "desde 2002"), "5 SEDES EN TODO EL PAÍS" en el banner de Component 9 y "Santa Fé/Paraná" o "Paraná" en sedes y footers. Testimonios: reseñas reales de Google elegidas por el cliente (las del Figma eran de ejemplo); se muestra nombre + inicial del apellido y el texto tal cual.
 
 ## Pendientes del cliente/diseñadora
-Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), número de WhatsApp, redes, destino de "Trabajá con nosotros" y política de privacidad, a dónde llegan los formularios.
+Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), destino de "Trabajá con nosotros" y política de privacidad. WhatsApp y redes ya están en `lib/site.ts`. El formulario manda mail con Resend (`app/api/contacto/route.ts`) y necesita en Vercel las mismas variables que la landing: `RESEND_API_KEY`, `RESEND_FROM`, `NOTIFICATION_EMAIL`.
 
 ## Flujo acordado
 1. Inventario (páginas, secciones, componentes, colores, tipografías) → validar con el usuario antes de codear.
