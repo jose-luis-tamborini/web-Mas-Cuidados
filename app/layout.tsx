@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
+import { dominioDefinitivo, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -18,12 +19,17 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Más Cuidados | Cuidadores y acompañantes para sanatorios y domicilios",
     template: "%s | Más Cuidados",
   },
   description:
     "Soluciones de cuidado, planes de seguros e internación domiciliaria, coordinadas por un solo equipo para acompañar a tu familia en cada etapa. Desde 2002.",
+  // Vista previa al compartir el link (WhatsApp, redes). La imagen es app/opengraph-image.jpg.
+  openGraph: { type: "website", locale: "es_AR", siteName: "Más Cuidados" },
+  // Sin dominio definitivo, la dirección provisoria de Vercel no se indexa (también lo dice app/robots.ts).
+  ...(dominioDefinitivo ? {} : { robots: { index: false, follow: false } }),
   // El diseño es solo claro: que Dark Reader no oscurezca la página.
   other: { "darkreader-lock": "true" },
 };

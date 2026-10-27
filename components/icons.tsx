@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 // Íconos exportados del Figma (trazos originales).
 // LinkedIn y Facebook no se pudieron exportar: se usan los de react-icons (Font Awesome) en el Footer.
 
@@ -52,15 +54,17 @@ export function InstagramIcon({ className }: IconProps) {
 }
 
 export function StarIcon({ className }: IconProps) {
+  // Cada estrella necesita su propio id de degradado: un id repetido en la página es HTML inválido.
+  const id = useId();
   return (
     <svg viewBox="0 0 35 36" aria-hidden="true" className={className}>
       <defs>
-        <linearGradient id="star-gradient" x1="0" y1="18" x2="35" y2="18" gradientUnits="userSpaceOnUse">
+        <linearGradient id={id} x1="0" y1="18" x2="35" y2="18" gradientUnits="userSpaceOnUse">
           <stop offset="0.317" stopColor="#986BBA" />
           <stop offset="1" stopColor="#530567" />
         </linearGradient>
       </defs>
-      <path d="M6.69375 36L9.5375 22.6895L0 13.7368L12.6 12.5526L17.5 0L22.4 12.5526L35 13.7368L25.4625 22.6895L28.3062 36L17.5 28.9421L6.69375 36Z" fill="url(#star-gradient)" />
+      <path d="M6.69375 36L9.5375 22.6895L0 13.7368L12.6 12.5526L17.5 0L22.4 12.5526L35 13.7368L25.4625 22.6895L28.3062 36L17.5 28.9421L6.69375 36Z" fill={`url(#${id})`} />
     </svg>
   );
 }

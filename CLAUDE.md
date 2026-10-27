@@ -38,6 +38,9 @@ Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@t
 ## Pendientes del cliente/diseñadora
 Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), destino de "Trabajá con nosotros" y política de privacidad. WhatsApp y redes ya están en `lib/site.ts`. El formulario manda mail con Resend (`app/api/contacto/route.ts`) y necesita en Vercel las mismas variables que la landing: `RESEND_API_KEY`, `RESEND_FROM`, `NOTIFICATION_EMAIL`.
 
+## Lanzamiento
+Mientras no exista `NEXT_PUBLIC_SITE_URL`, el sitio se publica con `noindex` y `robots.txt` bloqueando todo (para que Google no indexe la dirección provisoria de Vercel). Al pasar al dominio definitivo, cargar `NEXT_PUBLIC_SITE_URL=https://<dominio>` (sin barra final) en el hosting y volver a publicar: con eso se habilita la indexación y el sitemap usa ese dominio. Ícono, imagen para compartir (`app/opengraph-image.jpg`), sitemap y página 404 ya están en `app/`.
+
 ## Flujo acordado
 1. Inventario (páginas, secciones, componentes, colores, tipografías) → validar con el usuario antes de codear.
 2. Base: tokens en `app/globals.css`, fuentes, header/footer, componentes base.

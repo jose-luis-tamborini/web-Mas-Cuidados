@@ -1,5 +1,17 @@
 // Datos del sitio que se repiten en varias páginas (menú, contacto, sedes, redes).
 
+/**
+ * Dirección pública del sitio, para los links absolutos (vista previa al compartir, sitemap).
+ * NEXT_PUBLIC_SITE_URL se carga cuando la web tenga su dominio definitivo; mientras no esté, los buscadores
+ * no la indexan (ver app/robots.ts) para que no aparezca la dirección provisoria de Vercel.
+ */
+export const dominioDefinitivo = process.env.NEXT_PUBLIC_SITE_URL;
+export const siteUrl =
+  dominioDefinitivo ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export type NavItem =
   | { label: string; href: string }
   | { label: string; children: { label: string; href: string }[] };
