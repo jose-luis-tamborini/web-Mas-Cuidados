@@ -6,8 +6,17 @@ import { reveal } from "@/components/ui/reveal";
 
 // "En los medios": nota en video (pedido del cliente, no está en el Figma). Respeta la proporción original del
 // video, no arranca solo y tiene un botón de reproducción al centro; al tocarlo aparecen los controles del navegador.
-// Mientras no esté el archivo, `video` queda en null y la Home no muestra la sección.
-export const video: { src: string; poster: string; ancho: number; alto: number } | null = null;
+// Nota de Novaresio: original 4K del cliente (49 MB) pasado a H.264 con audio AAC 96k (`-preset veryslow -tune film
+// -refs 4 -movflags +faststart`): 1080p con crf 26 y `-level:v 4.0` (8,6 MB) en desktop, 720p con crf 27 y
+// `-level:v 3.1` (4,2 MB) en pantallas chicas. Portada: cuadro del segundo 6.
+// Si se saca el video, poner `video` en null y la Home no muestra la sección.
+export const video: { src1080: string; src720: string; poster: string; ancho: number; alto: number } | null = {
+  src1080: "/videos/home/medios-novaresio-1080.mp4",
+  src720: "/videos/home/medios-novaresio-720.mp4",
+  poster: "/images/home/medios-novaresio.jpg",
+  ancho: 16,
+  alto: 9,
+};
 
 export default function MediosSection() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -29,13 +38,15 @@ export default function MediosSection() {
         >
           <video
             ref={ref}
-            src={video.src}
             poster={video.poster}
             preload="none"
             playsInline
             controls={iniciado}
             className="h-full w-full object-contain"
-          />
+          >
+            <source src={video.src1080} type="video/mp4" media="(min-width: 1024px)" />
+            <source src={video.src720} type="video/mp4" />
+          </video>
           {!iniciado && (
             <button
               type="button"
