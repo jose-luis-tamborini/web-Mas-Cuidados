@@ -4,8 +4,9 @@ import { useState } from "react";
 import { reveal } from "@/components/ui/reveal";
 import { contacto } from "@/lib/site";
 
-// Formulario "Solicitá un Asesor de Servicios Ahora". Está en todas las páginas del diseño.
-// Las consultas llegan por mail (app/api/contacto/route.ts), a las mismas casillas que la landing anterior.
+// Formulario "Solicitá asesoramiento". Está en todas las páginas del diseño.
+// Las consultas llegan por mail (app/api/contacto/route.ts). Cada campo lleva solo el placeholder (pedido del
+// cliente: sin la etiqueta repetida debajo); el nombre accesible va en aria-label.
 
 const servicios = [
   "Servicio particular en domicilio",
@@ -16,49 +17,14 @@ const servicios = [
   "Otro",
 ];
 
-const provincias = [
-  "Buenos Aires",
-  "CABA",
-  "Catamarca",
-  "Chaco",
-  "Chubut",
-  "Córdoba",
-  "Corrientes",
-  "Entre Ríos",
-  "Formosa",
-  "Jujuy",
-  "La Pampa",
-  "La Rioja",
-  "Mendoza",
-  "Misiones",
-  "Neuquén",
-  "Río Negro",
-  "Salta",
-  "San Juan",
-  "San Luis",
-  "Santa Cruz",
-  "Santa Fe",
-  "Santiago del Estero",
-  "Tierra del Fuego",
-  "Tucumán",
-];
+// Las mismas opciones que la landing, sin Paraná (esa sede cerró).
+const ciudades = ["Rosario", "CABA", "Córdoba", "Santa Fe", "Otro"];
 
 const fieldClass =
   "w-full border-2 border-brand bg-transparent px-5 text-base text-brand placeholder:text-muted focus:border-brand-deep focus:ring-2 focus:ring-lilac/50 focus:outline-none lg:border-[0.12rem] lg:px-[1rem] lg:text-[1.075rem]";
 const inputClass = `${fieldClass} h-12 rounded-full lg:h-[2.9375rem]`;
-const labelClass = "mt-2 block px-1 text-base lg:mt-[0.6875rem] lg:px-0 lg:text-[1.075rem] lg:leading-[1.35]";
-
-function Campo({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col-reverse">
-      <label htmlFor={id} className={labelClass}>
-        {label}
-      </label>
-      {children}
-    </div>
-  );
-}
-
+// Mientras no se elige una opción, el desplegable se ve del color de los placeholders.
+const selectClass = `${inputClass} invalid:text-muted [&>option]:text-brand`;
 // "home": franja gris con sombra, como en la Home. "franja": la misma franja con la tarjeta 8 px más abajo
 // (Seguros). "pagina": sobre el fondo crema y a lo ancho del contenido de las páginas interiores (1697 px).
 const franja =
@@ -88,16 +54,15 @@ export default function ContactoSection({ variante = "home" }: { variante?: keyo
         >
           <div className="mx-auto max-w-[56.0625rem]">
             <h2 id="contacto-titulo" className="font-serif text-[1.75rem] leading-snug font-semibold lg:text-[2.39rem] lg:leading-[1.33]">
-              Solicitá un Asesor de Servicios Ahora
+              Solicitá asesoramiento
             </h2>
             <span aria-hidden="true" className="mt-2 block h-0.5 w-28 bg-brand lg:mt-[1.0625rem] lg:w-[7.25rem]" />
             <p className="mt-4 text-base leading-[1.9] lg:mt-[0.4rem] lg:text-[1.195rem]">
-              Completá tus datos de contacto a continuación para que uno de nuestros asesores de servicios se ponga en
-              contacto con vos y te brinde toda la información que necesitás.
+              Completá tus datos y un asesor se pondrá en contacto con vos.
             </p>
 
             <form
-              className="mt-6 grid gap-x-9 gap-y-5 sm:grid-cols-2 lg:mt-[3.1875rem] lg:gap-x-[2.3125rem] lg:gap-y-[2.375rem]"
+              className="mt-6 grid gap-x-9 gap-y-5 sm:grid-cols-2 lg:mt-[3.1875rem] lg:gap-x-[2.3125rem] lg:gap-y-[1.75rem]"
               onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.currentTarget;
@@ -118,62 +83,41 @@ export default function ContactoSection({ variante = "home" }: { variante?: keyo
             >
               {/* Campo trampa para bots: oculto para las personas y para los lectores de pantalla */}
               <input type="text" name="sitio" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
-              <Campo id="nombre" label="Nombre">
-                <input id="nombre" name="nombre" placeholder="Nombre" autoComplete="given-name" required className={inputClass} />
-              </Campo>
-              <Campo id="apellido" label="Apellido">
-                <input id="apellido" name="apellido" placeholder="Apellido" autoComplete="family-name" required className={inputClass} />
-              </Campo>
-              <Campo id="email" label="Correo Electrónico">
-                <input id="email" name="email" type="email" placeholder="Correo Electrónico" autoComplete="email" required className={inputClass} />
-              </Campo>
-              <Campo id="whatsapp" label="WhatsApp">
-                <input id="whatsapp" name="whatsapp" type="tel" placeholder="WhatsApp" autoComplete="tel" required className={inputClass} />
-              </Campo>
-              <Campo id="provincia" label="Provincia">
-                <select id="provincia" name="provincia" required defaultValue="" className={inputClass}>
-                  <option value="" disabled>
-                    -Por favor, elegí una opción-
-                  </option>
-                  {provincias.map((p) => (
-                    <option key={p}>{p}</option>
-                  ))}
-                </select>
-              </Campo>
-              <Campo id="localidad" label="Localidad">
-                <input id="localidad" name="localidad" placeholder="Localidad" autoComplete="address-level2" className={inputClass} />
-              </Campo>
-              <div className="sm:col-span-2">
-                <Campo id="servicio" label="Servicio">
-                  <select id="servicio" name="servicio" required defaultValue="" className={inputClass}>
-                    <option value="" disabled>
-                      -Por favor, elegí una opción-
-                    </option>
-                    {servicios.map((s) => (
-                      <option key={s}>{s}</option>
-                    ))}
-                  </select>
-                </Campo>
-              </div>
-              {/* En el diseño el botón va a la derecha, en la misma línea que la etiqueta "Comentarios" */}
+              <input id="nombre" name="nombre" aria-label="Nombre y apellido" placeholder="Nombre y apellido" autoComplete="name" required className={inputClass} />
+              <input id="email" name="email" type="email" aria-label="Correo electrónico" placeholder="Correo electrónico" autoComplete="email" required className={inputClass} />
+              <input id="whatsapp" name="whatsapp" type="tel" aria-label="WhatsApp" placeholder="WhatsApp" autoComplete="tel" required className={inputClass} />
+              <select id="ciudad" name="ciudad" aria-label="Ciudad" required defaultValue="" className={selectClass}>
+                <option value="" disabled>
+                  Ciudad
+                </option>
+                {ciudades.map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+              <select id="servicio" name="servicio" aria-label="Servicio" required defaultValue="" className={`${selectClass} sm:col-span-2`}>
+                <option value="" disabled>
+                  Seleccioná un servicio
+                </option>
+                {servicios.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </select>
               <div className="sm:col-span-2">
                 <textarea
                   id="comentarios"
                   name="comentarios"
                   rows={5}
-                  placeholder="Comentarios"
+                  aria-label="Comentarios (opcional)"
+                  placeholder="Comentarios (opcional)"
                   className={`${fieldClass} block rounded-[1.25rem] py-3 lg:h-[9.0625rem] lg:py-[0.6875rem]`}
                 />
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <label htmlFor="comentarios" className={labelClass}>
-                    Comentarios
-                  </label>
+                <div className="flex justify-end">
                   <button
                     type="submit"
                     disabled={estado === "enviando"}
-                    className="mt-2 self-end rounded-full bg-brand/55 px-7 py-3 text-[0.97rem] font-bold tracking-[0.016em] text-mist uppercase shadow-[4.7px_4.7px_31px_rgb(0_0_0/0.25)] transition-colors hover:bg-brand disabled:cursor-wait disabled:opacity-70 lg:mt-[2.25rem] lg:flex lg:h-[3.6875rem] lg:w-[19.375rem] lg:items-center lg:justify-center lg:px-0 lg:py-0"
+                    className="mt-5 rounded-full bg-brand/55 px-7 py-3 text-[0.97rem] font-bold tracking-[0.016em] text-mist uppercase shadow-[4.7px_4.7px_31px_rgb(0_0_0/0.25)] transition-colors hover:bg-brand disabled:cursor-wait disabled:opacity-70 lg:mt-[2.25rem] lg:flex lg:h-[3.6875rem] lg:w-[19.375rem] lg:items-center lg:justify-center lg:px-0 lg:py-0"
                   >
-                    {estado === "enviando" ? "Enviando…" : "Quiero que me contacten."}
+                    {estado === "enviando" ? "Enviando…" : "Quiero que me contacten"}
                   </button>
                 </div>
                 <p role="status" className="mt-3 text-right text-base font-semibold lg:text-[1.125rem]">

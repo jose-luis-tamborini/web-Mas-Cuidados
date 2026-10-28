@@ -1,15 +1,13 @@
-// Recibe el formulario "Solicitá un Asesor de Servicios Ahora" y lo manda por mail con Resend, a las mismas
-// casillas que la landing anterior. Variables de entorno (las mismas que usa la landing):
-// RESEND_API_KEY, RESEND_FROM y NOTIFICATION_EMAIL (una o varias casillas separadas por coma).
+// Recibe el formulario "Solicitá asesoramiento" y lo manda por mail con Resend. Variables de entorno:
+// RESEND_API_KEY, RESEND_FROM y NOTIFICATION_EMAIL (una o varias casillas separadas por coma; si no está,
+// va a info@mascuidados.com.ar, la casilla que pidió el cliente).
 // Se llama a la API de Resend con fetch para no sumar la dependencia.
 
 const campos = {
-  nombre: "Nombre",
-  apellido: "Apellido",
+  nombre: "Nombre y apellido",
   email: "Correo electrónico",
   whatsapp: "WhatsApp",
-  provincia: "Provincia",
-  localidad: "Localidad",
+  ciudad: "Ciudad",
   servicio: "Servicio",
   comentarios: "Comentarios",
   pagina: "Enviado desde",
@@ -17,7 +15,7 @@ const campos = {
 
 type Campo = keyof typeof campos;
 
-const obligatorios: Campo[] = ["nombre", "apellido", "email", "whatsapp", "provincia", "servicio"];
+const obligatorios: Campo[] = ["nombre", "email", "whatsapp", "ciudad", "servicio"];
 
 const escapar = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -41,9 +39,9 @@ export async function POST(request: Request) {
     return Response.json({ error: "Faltan datos obligatorios." }, { status: 422 });
   }
 
-  const { RESEND_API_KEY, RESEND_FROM, NOTIFICATION_EMAIL } = process.env;
-  if (!RESEND_API_KEY || !RESEND_FROM || !NOTIFICATION_EMAIL) {
-    console.error("[contacto] Faltan RESEND_API_KEY, RESEND_FROM o NOTIFICATION_EMAIL");
+  const { RESEND_API_KEY, RESEND_FROM, NOTIFICATION_EMAIL = "info@mascuidados.com.ar" } = process.env;
+  if (!RESEND_API_KEY || !RESEND_FROM) {
+    console.error("[contacto] Faltan RESEND_API_KEY o RESEND_FROM");
     return Response.json({ error: "El formulario no está configurado." }, { status: 500 });
   }
 
@@ -62,7 +60,7 @@ export async function POST(request: Request) {
       from: RESEND_FROM,
       to: NOTIFICATION_EMAIL.split(",").map((s) => s.trim()),
       reply_to: valores.email,
-      subject: `Nuevo contacto web: ${valores.nombre} ${valores.apellido} — ${valores.servicio}`,
+      subject: `Nuevo contacto web: ${valores.nombre} — ${valores.servicio}`,
       html: `<h2 style="color:#4A007D;font-family:sans-serif">Nuevo contacto desde la web</h2><table style="border-collapse:collapse;font-family:sans-serif;font-size:14px;width:100%;max-width:560px">${filas}</table>`,
     }),
   });

@@ -5,6 +5,7 @@ import DiferencialSection from "@/components/home/DiferencialSection";
 import SegurosSection from "@/components/home/SegurosSection";
 import BeneficiosSection from "@/components/home/BeneficiosSection";
 import NumerosSection from "@/components/home/NumerosSection";
+import MediosSection from "@/components/home/MediosSection";
 import TestimoniosSection from "@/components/home/TestimoniosSection";
 import SedesSection from "@/components/home/SedesSection";
 import AsesoramientoBanner from "@/components/sections/AsesoramientoBanner";
@@ -30,6 +31,7 @@ export default function Home() {
 
       <div className="bg-lavender">
         <NumerosSection />
+        <MediosSection />
         <TestimoniosSection />
       </div>
 
