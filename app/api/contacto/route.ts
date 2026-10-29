@@ -39,7 +39,10 @@ export async function POST(request: Request) {
     return Response.json({ error: "Faltan datos obligatorios." }, { status: 422 });
   }
 
-  const { RESEND_API_KEY, RESEND_FROM, NOTIFICATION_EMAIL = "info@mascuidados.com.ar" } = process.env;
+  // Leídas una por una (sin desestructurar) para que funcione el `env` de next.config.ts.
+  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  const RESEND_FROM = process.env.RESEND_FROM;
+  const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "info@mascuidados.com.ar";
   if (!RESEND_API_KEY || !RESEND_FROM) {
     console.error("[contacto] Faltan RESEND_API_KEY o RESEND_FROM");
     return Response.json({ error: "El formulario no está configurado." }, { status: 500 });
