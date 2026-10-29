@@ -24,7 +24,7 @@ Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@t
 
 ## Estructura
 - `lib/site.ts`: menú, contacto, sedes, columnas del footer (con TODOs de datos que faltan).
-- `components/layout/`: Header (submenú + menú mobile), Footer, botón de WhatsApp. `components/home/`: secciones de la Home. `components/sections/`: bloques que se repiten en varias páginas (banner de asesoramiento, formulario). `components/icons.tsx`: íconos con los trazos del Figma.
+- `components/layout/`: Header (submenú + menú mobile), Footer, botón "Consultanos" de AsisteClick (`AsisteClick.tsx`, pedido del cliente en lugar del de WhatsApp). `components/home/`: secciones de la Home. `components/sections/`: bloques que se repiten en varias páginas (banner de asesoramiento, formulario). `components/icons.tsx`: íconos con los trazos del Figma.
 - Tokens (colores, tamaños de letra, sombras, degradados) en `app/globals.css`.
 - Video del hero en `public/videos/home/` (original del cliente: `Escritorio/Webs/mas-cuidados/web/home/hero-home.mp4`). Cuatro versiones sin audio: 1080p y 720p, cada una en AV1 (`libaom-av1 -crf 38 -b:v 0 -cpu-used 5`) y en H.264 de respaldo (`libx264 -preset veryslow -tune film`, crf 30 con `-level:v 4.0` en 1080p y crf 28 con `-level:v 3.1` en 720p, `-refs 4`), todas con `-movflags +faststart`. El proyecto no tiene ffmpeg: usar `ffmpeg-static` instalado en una carpeta temporal.
 - **Medidas en desktop (≥1024 px):** el `font-size` del html escala con el ancho (16 px a 1952 px), así la página se ve igual que el Figma en cualquier pantalla. Toda medida desktop va con prefijo `lg:` y en rem = px del diseño / 16 (ej. 64 px → `lg:mt-[4rem]`). Sacar los px con `figma-dump.js`. El usuario compara contra el Figma a 1366 px: verificar con `shot.js` + `compare.js` (diseño a la izquierda, localhost a la derecha) y midiendo secciones en px de diseño.
@@ -39,10 +39,15 @@ Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@t
 "Desde 2002" y 4 sedes (Rosario, Córdoba, Buenos Aires, Santa Fe; Paraná cerró). El Figma tiene datos viejos que hay que corregir al maquetar: "16 años de trayectoria" en Quiénes somos (usar "desde 2002"), "5 SEDES EN TODO EL PAÍS" en el banner de Component 9 y "Santa Fé/Paraná" o "Paraná" en sedes y footers. Testimonios: reseñas reales de Google elegidas por el cliente (las del Figma eran de ejemplo); se muestra nombre + inicial del apellido y el texto tal cual.
 
 ## Pendientes del cliente/diseñadora
-Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), destino de "Trabajá con nosotros" y política de privacidad. WhatsApp y redes ya están en `lib/site.ts`. El formulario manda mail con Resend (`app/api/contacto/route.ts`) y necesita en Vercel las mismas variables que la landing: `RESEND_API_KEY`, `RESEND_FROM`, `NOTIFICATION_EMAIL`.
+Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), destino de "Trabajá con nosotros" y política de privacidad. WhatsApp y redes ya están en `lib/site.ts`.
+
+## Hosting (SiteGround)
+- La web corre en el plan GoGeek del cliente como "Proyecto de Node.js" (Site Tools → Node.js), conectado a GitHub: cada push a `main` se compila y publica solo (~1 min). Dirección temporal: https://joset39.sg-host.com. El WordPress actual de mascuidados.com.ar está en el mismo plan; Vercel queda como copia.
+- **Variables del panel:** SiteGround las pasa al compilar pero no a la web encendida, y pierde los valores con espacios o `<>`. Por eso `next.config.ts` copia al código del servidor las del formulario y el remitente por defecto está en `route.ts`. **Al cambiar una variable hay que volver a desplegar** ("Guardar y desplegar"). El registro de compilación muestra cuáles ve (`[check-node] Variables del formulario`).
+- Formulario: Resend con el dominio `mascuidados.com.ar` verificado (DNS en la Zona DNS del WordPress en SiteGround) y la clave `web-siteground` (solo envío, solo ese dominio). En el panel: `RESEND_API_KEY` y `NOTIFICATION_EMAIL`.
 
 ## Lanzamiento
-Mientras no exista `NEXT_PUBLIC_SITE_URL`, el sitio se publica con `noindex` y `robots.txt` bloqueando todo (para que Google no indexe la dirección provisoria de Vercel). Al pasar al dominio definitivo, cargar `NEXT_PUBLIC_SITE_URL=https://<dominio>` (sin barra final) en el hosting y volver a publicar: con eso se habilita la indexación y el sitemap usa ese dominio. Ícono, imagen para compartir (`app/opengraph-image.jpg`), sitemap y página 404 ya están en `app/`.
+Mientras no exista `NEXT_PUBLIC_SITE_URL`, el sitio se publica con `noindex` y `robots.txt` bloqueando todo (para que Google no indexe las direcciones provisorias). Al pasar al dominio definitivo, cargar `NEXT_PUBLIC_SITE_URL=https://<dominio>` (sin barra final) en el hosting y volver a publicar: con eso se habilita la indexación y el sitemap usa ese dominio. Ícono, imagen para compartir (`app/opengraph-image.jpg`), sitemap y página 404 ya están en `app/`.
 
 ## Flujo acordado
 1. Inventario (páginas, secciones, componentes, colores, tipografías) → validar con el usuario antes de codear.
