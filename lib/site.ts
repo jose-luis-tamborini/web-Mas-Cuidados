@@ -107,7 +107,6 @@ export const footerColumns: { titulo: string; links: { label: string; href: stri
       { label: "Cuidadores en sanatorios", href: "/servicio-particular" },
       { label: "Cuidadores en hospitales", href: "/servicio-particular" },
       { label: "Cuidadores en domicilio", href: "/servicio-particular" },
-      { label: "Medicina online", href: "/medicina-online" },
     ],
   },
   {

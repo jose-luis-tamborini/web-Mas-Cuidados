@@ -231,6 +231,18 @@ body {
   box-sizing: content-box;
   line-height: normal;
 }
+/* Más arriba y más adentro que lo que trae el widget (15 px / 20 px), pedido del cliente. En desktop, el mismo
+   margen derecho que tenía el botón de WhatsApp del diseño. */
+#asisteclick_button_floating {
+  right: 1rem !important;
+  bottom: 1.5rem !important;
+}
+@media (min-width: 64rem) {
+  #asisteclick_button_floating {
+    right: 6.8125rem !important;
+    bottom: 3.5rem !important;
+  }
+}
 #asisteclick_button_css {
   display: inline-flex !important;
   align-items: center !important;
