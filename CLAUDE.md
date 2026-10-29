@@ -5,7 +5,10 @@
 Web institucional de Más Cuidados. No confundir con `../mas-cuidados/` (landing anterior del mismo cliente): no editarla; si se reutiliza algo de ahí (tokens, form con Resend, Cloudinary), copiarlo a este proyecto.
 
 ## Stack
-Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@tailwindcss/turbopack`. Cache Components y Partial Prefetching vienen activados por create-next-app.
+Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@tailwindcss/postcss` (`postcss.config.mjs`). Cache Components y Partial Prefetching vienen activados por create-next-app.
+- **Build con webpack** (`next build --webpack`): el hosting de SiteGround no deja abrir puertos al compilar y Turbopack los necesita para los loaders de CSS (ticket 5161088). En desarrollo sigue Turbopack. No volver a `@tailwindcss/turbopack`.
+- **Versiones exactas en `package.json`** (sin `^`): SiteGround borra el `package-lock.json` antes de instalar. Al actualizar una dependencia, poner la versión exacta.
+- `scripts/check-node.mjs` (prebuild) frena el build si el Node del servidor es vulnerable a Node2Shell.
 
 ## Diseño (Figma)
 - Archivo "MÁSCUIDADOS WEB/LANDING", key `h8TtEsWtKB6JFcnYrdWdUM`. Página "pagina web correcciones": https://www.figma.com/design/h8TtEsWtKB6JFcnYrdWdUM/M%C3%81SCUIDADOS-WEB-LANDING?node-id=1351-234 (para ir a un frame, cambiar `node-id` por su id con guion, ej. `2008-505`).
