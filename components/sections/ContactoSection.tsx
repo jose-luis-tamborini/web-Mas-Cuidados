@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { reveal } from "@/components/ui/reveal";
+import { medir } from "@/lib/medicion";
 import { contacto } from "@/lib/site";
 
 // Formulario "Solicitá asesoramiento". Está en todas las páginas del diseño.
@@ -66,16 +67,24 @@ export default function ContactoSection({ variante = "home" }: { variante?: keyo
               onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.currentTarget;
+                const datos = new FormData(form);
                 setEstado("enviando");
                 try {
                   const res = await fetch("/api/contacto", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), pagina: window.location.pathname }),
+                    body: JSON.stringify({ ...Object.fromEntries(datos), pagina: window.location.pathname }),
                   });
                   if (!res.ok) throw new Error(String(res.status));
                   form.reset();
                   setEstado("enviado");
+                  // Conversión para GTM (lead). Sin datos personales.
+                  medir({
+                    event: "formulario_enviado",
+                    servicio: String(datos.get("servicio") ?? ""),
+                    ciudad: String(datos.get("ciudad") ?? ""),
+                    pagina: window.location.pathname,
+                  });
                 } catch {
                   setEstado("error");
                 }

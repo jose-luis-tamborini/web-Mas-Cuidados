@@ -3,6 +3,7 @@ import { Montserrat, Playfair_Display } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AsisteClick from "@/components/layout/AsisteClick";
+import TagManager from "@/components/layout/TagManager";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { dominioDefinitivo, siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-AR" className={`${montserrat.variable} ${playfair.variable} antialiased`}>
       <body className="min-h-dvh">
+        <TagManager />
         <Header />
         <main>{children}</main>
         <Footer />
