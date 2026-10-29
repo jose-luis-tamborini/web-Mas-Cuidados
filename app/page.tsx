@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import HeroSection from "@/components/home/HeroSection";
 import ServiciosSection from "@/components/home/ServiciosSection";
@@ -10,12 +11,18 @@ import TestimoniosSection from "@/components/home/TestimoniosSection";
 import SedesSection from "@/components/home/SedesSection";
 import AsesoramientoBanner from "@/components/sections/AsesoramientoBanner";
 import ContactoSection from "@/components/sections/ContactoSection";
+import DatosEstructurados from "@/components/home/DatosEstructurados";
+import { canonica } from "@/lib/site";
 import fondoServicios from "@/public/images/home/fondo-servicios.jpg";
 import asesoramiento from "@/public/images/home/asesoramiento.jpg";
+
+// Título y descripción: los de app/layout.tsx.
+export const metadata: Metadata = { ...canonica("/") };
 
 export default function Home() {
   return (
     <>
+      <DatosEstructurados />
       <HeroSection />
 
       {/* Servicios y diferencial comparten fondo: foto al 12% y degradado que sale del hero */}

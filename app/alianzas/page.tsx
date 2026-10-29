@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import PageHero from "@/components/sections/PageHero";
 import ContactoSection from "@/components/sections/ContactoSection";
 import IntroSection from "@/components/alianzas/IntroSection";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: "Alianzas",
   description:
     "Programa de aliados para sanatorios, obras sociales, prepagas, ART, mutuales y empresas de salud: sin inversión inicial, con rentabilidad inmediata y respaldo operativo total.",
+  ...canonica("/alianzas"),
 };
 
 export default function Alianzas() {

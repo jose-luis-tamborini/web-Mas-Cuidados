@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import PageHero from "@/components/sections/PageHero";
 import AsesoramientoBanner from "@/components/sections/AsesoramientoBanner";
 import ContactoSection from "@/components/sections/ContactoSection";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: "Medicina online",
   description:
     "Atención médica rápida estés donde estés: videollamadas con médicos, recetas y órdenes digitales y seguimiento profesional, sin moverte de tu casa.",
+  ...canonica("/medicina-online"),
 };
 
 export default function MedicinaOnline() {

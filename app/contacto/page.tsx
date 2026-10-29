@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import PageHero from "@/components/sections/PageHero";
 import ContactoSection from "@/components/sections/ContactoSection";
 import IntroSection from "@/components/contacto/IntroSection";
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   title: "Contacto",
   description:
     "Dejanos tus datos y un asesor de Más Cuidados se comunica con vos para orientarte sobre cuidadores, seguros de internación, internación domiciliaria y medicina online.",
+  ...canonica("/contacto"),
 };
 
 export default function Contacto() {

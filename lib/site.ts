@@ -12,6 +12,12 @@ export const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
+/**
+ * URL canónica de cada página (metadata.alternates). Solo con el dominio definitivo: en las direcciones provisorias
+ * apuntaría a ellas mismas (o a localhost en SiteGround, donde no hay VERCEL_PROJECT_PRODUCTION_URL).
+ */
+export const canonica = (ruta: string) => (dominioDefinitivo ? { alternates: { canonical: ruta } } : {});
+
 export type NavItem =
   | { label: string; href: string }
   | { label: string; children: { label: string; href: string }[] };

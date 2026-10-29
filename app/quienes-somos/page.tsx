@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import PageHero from "@/components/sections/PageHero";
 import ContactoSection from "@/components/sections/ContactoSection";
 import EstructuraSection from "@/components/quienes-somos/EstructuraSection";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: "Quiénes somos",
   description:
     "Desde 2002 acompañamos a pacientes y familias en domicilios, sanatorios e instituciones: 4 sedes, más de 250 prestadores y coordinación las 24 horas, los 365 días del año.",
+  ...canonica("/quienes-somos"),
 };
 
 export default function QuienesSomos() {

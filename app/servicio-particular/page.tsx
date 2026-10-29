@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import PageHero from "@/components/sections/PageHero";
 import ContactoSection from "@/components/sections/ContactoSection";
 import IntroSection from "@/components/servicio-particular/IntroSection";
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
   title: "Servicio particular en domicilio",
   description:
     "Cuidadores profesionales en domicilio o sanatorio, por horas, días o meses. Turnos de 8, 12 o 24 hs, supervisión médica y telemedicina incluidas.",
+  ...canonica("/servicio-particular"),
 };
 
 export default function ServicioParticular() {

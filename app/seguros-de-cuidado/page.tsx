@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import PageHero from "@/components/sections/PageHero";
 import ContactoSection from "@/components/sections/ContactoSection";
 import IntroSection from "@/components/seguros/IntroSection";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "Seguros de internación",
   description:
     "Planes de seguros de internación en sanatorios, domicilios e instituciones: Premium Plus, Premium, Básico, Soporte Residencial, Regional y Joven.",
+  ...canonica("/seguros-de-cuidado"),
 };
 
 export default function Seguros() {

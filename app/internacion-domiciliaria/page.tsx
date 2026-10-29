@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { canonica } from "@/lib/site";
 import Image from "next/image";
 import PageHero from "@/components/sections/PageHero";
 import ContactoSection from "@/components/sections/ContactoSection";
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
   title: "Internación domiciliaria",
   description:
     "Internación domiciliaria para obras sociales, prepagas y entidades de salud: médicos clínicos, enfermería, kinesiología, equipamiento, insumos y estudios en casa. Habilitados por la Superintendencia de Servicios de Salud.",
+  ...canonica("/internacion-domiciliaria"),
 };
 
 export default function InternacionDomiciliaria() {
