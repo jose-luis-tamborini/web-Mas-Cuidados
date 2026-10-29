@@ -1,6 +1,8 @@
 // Recibe el formulario "Solicitá asesoramiento" y lo manda por mail con Resend. Variables de entorno:
-// RESEND_API_KEY, RESEND_FROM y NOTIFICATION_EMAIL (una o varias casillas separadas por coma; si no está,
-// va a info@mascuidados.com.ar, la casilla que pidió el cliente).
+// RESEND_API_KEY (obligatoria), NOTIFICATION_EMAIL (una o varias casillas separadas por coma; si no está, va a
+// info@mascuidados.com.ar, la casilla que pidió el cliente) y RESEND_FROM (opcional: el remitente por defecto
+// está acá, porque SiteGround pierde los valores con espacios o "<>" en su panel). El dominio mascuidados.com.ar
+// está verificado en Resend.
 // Se llama a la API de Resend con fetch para no sumar la dependencia.
 
 const campos = {
@@ -41,10 +43,10 @@ export async function POST(request: Request) {
 
   // Leídas una por una (sin desestructurar) para que funcione el `env` de next.config.ts.
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const RESEND_FROM = process.env.RESEND_FROM;
+  const RESEND_FROM = process.env.RESEND_FROM || "Más Cuidados Web <web@mascuidados.com.ar>";
   const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "info@mascuidados.com.ar";
-  if (!RESEND_API_KEY || !RESEND_FROM) {
-    console.error("[contacto] Faltan RESEND_API_KEY o RESEND_FROM");
+  if (!RESEND_API_KEY) {
+    console.error("[contacto] Falta RESEND_API_KEY");
     return Response.json({ error: "El formulario no está configurado." }, { status: 500 });
   }
 
