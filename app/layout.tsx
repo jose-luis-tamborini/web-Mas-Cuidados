@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import AsisteClick from "@/components/layout/AsisteClick";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { dominioDefinitivo, siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main>{children}</main>
         <Footer />
-        <WhatsAppButton />
+        <AsisteClick />
         <RevealOnScroll />
       </body>
     </html>

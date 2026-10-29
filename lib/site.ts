@@ -103,7 +103,6 @@ export const footerColumns: { titulo: string; links: { label: string; href: stri
   {
     titulo: "Servicios",
     links: [
-      { label: "Internación domiciliaria", href: "/internacion-domiciliaria" },
       { label: "Servicio inmediato", href: "/servicio-particular" },
       { label: "Cuidadores en sanatorios", href: "/servicio-particular" },
       { label: "Cuidadores en hospitales", href: "/servicio-particular" },

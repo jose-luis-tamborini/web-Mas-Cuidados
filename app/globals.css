@@ -220,3 +220,19 @@ body {
     transform: translateX(100%);
   }
 }
+
+/*
+  Botón "Consultanos" de AsisteClick (components/layout/AsisteClick.tsx). El widget trae sus estilos y los
+  de base de Tailwind (border-box, line-height) se los desarman: el texto quedaba debajo del botón. Misma
+  corrección que la landing. Fuera de @layer y con !important porque el widget también usa !important.
+*/
+#asisteclick_button_floating,
+#asisteclick_button_floating * {
+  box-sizing: content-box;
+  line-height: normal;
+}
+#asisteclick_button_css {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}

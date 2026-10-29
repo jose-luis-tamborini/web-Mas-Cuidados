@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Eyebrow from "@/components/ui/Eyebrow";
 import { reveal } from "@/components/ui/reveal";
 
-// "En los medios": nota en video (pedido del cliente, no está en el Figma). Respeta la proporción original del
+// "En medios": nota en video (pedido del cliente, no está en el Figma). Respeta la proporción original del
 // video, no arranca solo y tiene un botón de reproducción al centro; al tocarlo aparecen los controles del navegador.
 // Nota de Novaresio: original 4K del cliente (49 MB) pasado a H.264 con audio AAC 96k (`-preset veryslow -tune film
 // -refs 4 -movflags +faststart`): 1080p con crf 26 y `-level:v 4.0` (8,6 MB) en desktop, 720p con crf 27 y
@@ -29,7 +29,7 @@ export default function MediosSection() {
         <div className="text-center">
           <Eyebrow>Nuestra presencia</Eyebrow>
           <h2 id="medios-titulo" className="mt-1 font-serif text-h2 font-semibold lg:mt-[0.5625rem]">
-            En los medios
+            En medios
           </h2>
         </div>
         <div
