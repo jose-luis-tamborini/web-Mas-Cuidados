@@ -18,8 +18,8 @@ const servicios = [
   "Otro",
 ];
 
-// Las mismas opciones que la landing, sin Paraná (esa sede cerró).
-const ciudades = ["Rosario", "CABA", "Córdoba", "Santa Fe", "Otro"];
+// La sede de Paraná cerró, pero el cliente pidió que siga en la lista (octubre 2026).
+const ciudades = ["Rosario", "CABA", "Córdoba", "Santa Fe", "Paraná", "Otro"];
 
 const fieldClass =
   "w-full border-2 border-brand bg-transparent px-5 text-base text-brand placeholder:text-muted focus:border-brand-deep focus:ring-2 focus:ring-lilac/50 focus:outline-none lg:border-[0.12rem] lg:px-[1rem] lg:text-[1.075rem]";

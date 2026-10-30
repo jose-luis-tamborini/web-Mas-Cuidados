@@ -18,6 +18,8 @@ type Props = {
   incluyeClassName?: string;
   /** Separación entre el título y el texto en desktop (en el Plan Joven va más pegado). */
   textoClassName?: string;
+  /** Encuadre de la foto (ej. en mobile la del Plan Joven va desde arriba para que se vean las caras). */
+  imagenClassName?: string;
 };
 
 export default function PlanCard({
@@ -29,6 +31,7 @@ export default function PlanCard({
   incluye,
   incluyeClassName = "lg:w-[32.75rem]",
   textoClassName = "lg:mt-[4.125rem]",
+  imagenClassName = "",
 }: Props) {
   return (
     <article
@@ -38,7 +41,7 @@ export default function PlanCard({
       className="overflow-hidden rounded-[1.75rem] bg-lavender text-[#521562] shadow-[0_4px_16px_4px_rgb(83_5_103/0.45)] lg:flex lg:h-[40rem] lg:rounded-[2.375rem] lg:shadow-[0_4px_23.1px_10px_#530567]"
     >
       <div className="relative aspect-[16/10] lg:aspect-auto lg:w-[31rem] lg:shrink-0">
-        <Image src={imagen} alt={imagenAlt} fill sizes="(min-width: 1024px) 26vw, 100vw" className="object-cover" />
+        <Image src={imagen} alt={imagenAlt} fill sizes="(min-width: 1024px) 26vw, 100vw" className={`object-cover ${imagenClassName}`} />
       </div>
 
       <div className="px-5 pt-6 tracking-[0.015em] lg:flex-1 lg:px-0 lg:pt-[5.6875rem] lg:pr-[1.0625rem] lg:pl-[2.25rem]">

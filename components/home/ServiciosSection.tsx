@@ -48,7 +48,7 @@ const servicios: Servicio[] = [
 
 export default function ServiciosSection() {
   return (
-    <section aria-label="Nuestros servicios" className="container-site pt-4 lg:pt-[1.125rem]">
+    <section id="servicios" aria-label="Nuestros servicios" className="container-site pt-4 lg:pt-[1.125rem]">
       {/* Mobile: desplegables uno debajo del otro, cerrados, con la foto de fondo en el título (como "Nuestro diferencial"). */}
       <ul className="flex flex-col gap-4 lg:hidden">
         {servicios.map((s) => (

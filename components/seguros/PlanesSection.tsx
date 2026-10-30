@@ -130,6 +130,7 @@ export default function PlanesSection() {
             titulo="Plan Joven"
             imagen={joven}
             imagenAlt="Cuidadora acompañando a un estudiante con el brazo enyesado"
+            imagenClassName="max-lg:object-top"
             incluyeClassName="lg:w-[30.625rem]"
             textoClassName="lg:mt-[1.8125rem]"
             incluye={[

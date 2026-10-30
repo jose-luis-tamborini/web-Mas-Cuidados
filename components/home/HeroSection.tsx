@@ -41,10 +41,10 @@ export default function HeroSection() {
           <span className="mt-3 block lg:mt-[0.5rem]">Un solo equipo para acompañar a tu familia en cada etapa.</span>
         </p>
         <a
-          href="#contacto"
+          href="#servicios"
           className="mt-10 flex h-12 items-center rounded-[1.875rem] bg-white px-6 text-lead text-brand shadow-float transition-colors hover:bg-lavender lg:mt-[4.5rem] lg:h-[3.125rem] lg:w-[14.625rem] lg:justify-center lg:px-0 lg:tracking-[0.02em]"
         >
-          Consultanos
+          Ver servicios
         </a>
       </div>
     </section>
