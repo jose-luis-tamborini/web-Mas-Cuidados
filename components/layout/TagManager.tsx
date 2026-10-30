@@ -1,11 +1,10 @@
 import Script from "next/script";
 import { gtmId } from "@/lib/medicion";
-import { dominioDefinitivo } from "@/lib/site";
 
-// Google Tag Manager. Solo con el dominio definitivo (NEXT_PUBLIC_SITE_URL), para que las visitas de prueba a las
-// direcciones provisorias no ensucien Analytics. Fragmento oficial de Google, cargado con next/script.
+// Google Tag Manager. En toda versión publicada, también en la dirección provisoria (pedido del cliente para probar
+// etiquetas antes del lanzamiento); no en `next dev`. Fragmento oficial de Google, cargado con next/script.
 export default function TagManager() {
-  if (!dominioDefinitivo) return null;
+  if (process.env.NODE_ENV !== "production") return null;
   return (
     <>
       <Script id="gtm" strategy="afterInteractive">

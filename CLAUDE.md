@@ -47,7 +47,7 @@ Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta
 - Formulario: Resend con el dominio `mascuidados.com.ar` verificado (DNS en la Zona DNS del WordPress en SiteGround) y la clave `web-siteground` (solo envío, solo ese dominio). En el panel: `RESEND_API_KEY` y `NOTIFICATION_EMAIL`.
 
 ## Medición
-- Google Tag Manager `GTM-KL3JCVS8` (el contenedor del WordPress; GA4 `G-D5KRH50Z70`) en `components/layout/TagManager.tsx`, **solo con `NEXT_PUBLIC_SITE_URL`** (las direcciones provisorias no ensucian Analytics).
+- Google Tag Manager `GTM-KL3JCVS8` (el contenedor del WordPress; GA4 `G-D5KRH50Z70`) en `components/layout/TagManager.tsx`, en toda versión publicada, también en la dirección provisoria (pedido del cliente, octubre 2026, para probar etiquetas); no se carga en `next dev`.
 - La web deja en el `dataLayer` (`lib/medicion.ts`, sin datos personales): `formulario_enviado` (servicio, ciudad, página) al enviar el formulario y `click_consultanos` (página) al tocar el botón de AsisteClick, que es un `<button>` y no lo ve el disparador de clics en links que tenía el contenedor.
 - Al lanzar, sacar el GTM del WordPress (pasa a ser el respaldo).
 
