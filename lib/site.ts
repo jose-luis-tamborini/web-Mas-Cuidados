@@ -53,14 +53,12 @@ export const redes = {
 export const resenasGoogle =
   "https://www.google.com/maps/place/M%C3%A1s+Cuidados+-+Cuidado+de+personas+en+sanatorios+y+domicilios.+Enfermer%C3%ADa+a+domicilio.+Internaci%C3%B3n+Domiciliaria/@-32.9446553,-60.6567399,17z/data=!4m8!3m7!1s0x95b7ab405674c245:0x2714a1d03a5537ff!8m2!3d-32.9446598!4d-60.654165!9m1!1b1!16s%2Fg%2F11fz9y4_m0";
 
-const maps = (direccion: string) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(direccion)}`;
-
 export type Sede = {
   nombre: string;
   direccion: string[];
   ciudad: string;
   icono: "rosario" | "cordoba" | "buenos-aires" | "santa-fe";
+  // Ficha de Google de la sede (links oficiales que pasó el cliente, octubre 2026).
   mapsHref: string;
 };
 
@@ -70,28 +68,28 @@ export const sedes: Sede[] = [
     direccion: ["Rioja 2240"],
     ciudad: "Rosario, Santa Fe",
     icono: "rosario",
-    mapsHref: maps("Rioja 2240, Rosario, Santa Fe"),
+    mapsHref: "https://maps.app.goo.gl/HUbZmJFY6DAHsGU17",
   },
   {
     nombre: "Córdoba",
     direccion: ["San Jerónimo 275", "Piso 3, Oficina 5"],
     ciudad: "Córdoba, Córdoba",
     icono: "cordoba",
-    mapsHref: maps("San Jerónimo 275, Córdoba"),
+    mapsHref: "https://maps.app.goo.gl/dczGPXnh8iK3zfiD9",
   },
   {
     nombre: "Buenos Aires",
     direccion: ["Larrea 1007", "Piso 6 Oficina D"],
     ciudad: "CABA, Buenos Aires",
     icono: "buenos-aires",
-    mapsHref: maps("Larrea 1007, CABA"),
+    mapsHref: "https://maps.app.goo.gl/7mDok8tgW8Y5dgfo9",
   },
   {
     nombre: "Santa Fe",
     direccion: ["Marcial Candioti 3456"],
     ciudad: "Santa Fe, Santa Fe",
     icono: "santa-fe",
-    mapsHref: maps("Marcial Candioti 3456, Santa Fe"),
+    mapsHref: "https://maps.app.goo.gl/1oTRFQsbdhawHr867",
   },
 ];
 
