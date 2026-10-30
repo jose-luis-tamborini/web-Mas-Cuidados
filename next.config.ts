@@ -11,6 +11,46 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   env: Object.fromEntries(variablesFormulario.map((k) => [k, process.env[k] as string])),
+  // URLs del WordPress anterior (wp-sitemap.xml, octubre 2026). Era una sola página: los bloques de servicios y
+  // sedes van a la página nueva que corresponde; lo demás (demos del tema, feeds, etiquetas) a la Home.
+  async redirects() {
+    const bloques: Record<string, string> = {
+      internacion_domiciliaria: "/internacion-domiciliaria",
+      insumosyequipamiento: "/internacion-domiciliaria",
+      enfermeriaadomicilio: "/internacion-domiciliaria",
+      acompanamiento_sanatorio: "/servicio-particular",
+      cuidado_domicilio: "/servicio-particular",
+      medicosyrecetasonline: "/medicina-online",
+      c_bsas: "/contacto",
+      c_cordoba: "/contacto",
+      c_parana: "/contacto",
+      c_rosario: "/contacto",
+      c_stafe: "/contacto",
+    };
+    const aLaHome = [
+      "/home-v2",
+      "/beginners-guide-to-start-your-photography-journey-2",
+      "/pxl-template/:path*",
+      "/portfolio/:path*",
+      "/portfolio-category/:path*",
+      "/service/:path*",
+      "/category/:path*",
+      "/tag/:path*",
+      "/author/:path*",
+      "/feed",
+      "/comments/feed",
+    ];
+    return [
+      ...Object.entries(bloques).map(([bloque, destination]) => ({
+        source: `/pxl-template/${bloque}`,
+        destination,
+        permanent: true,
+      })),
+      ...aLaHome.map((source) => ({ source, destination: "/", permanent: true })),
+      { source: "/wp-sitemap.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/wp-sitemap-:sitemap.xml", destination: "/sitemap.xml", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

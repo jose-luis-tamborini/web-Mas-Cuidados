@@ -53,7 +53,8 @@ Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta
 
 ## Lanzamiento
 Mientras no exista `NEXT_PUBLIC_SITE_URL`, el sitio se publica con `noindex` y `robots.txt` bloqueando todo (para que Google no indexe las direcciones provisorias). Al pasar al dominio definitivo, cargar `NEXT_PUBLIC_SITE_URL=https://<dominio>` (sin barra final) en el hosting y volver a publicar: con eso se habilita la indexación y el sitemap usa ese dominio. Ícono, imagen para compartir (`app/opengraph-image.jpg`), sitemap y página 404 ya están en `app/`. Con `NEXT_PUBLIC_SITE_URL` también aparecen las URLs canónicas (`canonica()` en `lib/site.ts`, en el `metadata` de cada página) y los datos estructurados de la Home (`components/home/DatosEstructurados.tsx`, empresa + 4 sedes) usan ese dominio. En SiteGround esa variable se lee al compilar: cargarla en el panel y volver a desplegar.
-- **Día del lanzamiento:** redirecciones 301 desde las URLs del WordPress actual (~26, en `https://mascuidados.com.ar/wp-sitemap.xml`: home-v2, portfolio, service, posts) a la página nueva que corresponda, con `redirects()` en `next.config.ts`; validar los datos estructurados en https://search.google.com/test/rich-results; dar de alta el sitemap en Search Console.
+- **Redirecciones del WordPress** (hechas, `redirects()` en `next.config.ts`): todas las URLs de su `wp-sitemap.xml` (demos del tema, portfolio, tags, bloques de servicios y sedes). Los PDF que linkeaba el WordPress (`/descargas/*.pdf`: brochures y franquicias) se copiaron a `public/descargas/` para que los links compartidos sigan andando.
+- **Día del lanzamiento:** validar los datos estructurados en https://search.google.com/test/rich-results; dar de alta el sitemap en Search Console.
 
 ## Flujo acordado
 1. Inventario (páginas, secciones, componentes, colores, tipografías) → validar con el usuario antes de codear.
