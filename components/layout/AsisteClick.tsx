@@ -1,12 +1,11 @@
 "use client";
 
-import Script from "next/script";
 import { useEffect } from "react";
 import { medir } from "@/lib/medicion";
 
 // Botón flotante "Consultanos" de AsisteClick: el canal de consulta que pidió el cliente (reemplaza al botón de
-// WhatsApp). Es el mismo widget de la landing, que allá se carga por Google Tag Manager (GTM-P37TCDNK); acá va
-// directo. Se carga cuando la página ya terminó, para no demorar el hero.
+// WhatsApp). El widget lo instala el analista desde Google Tag Manager (pedido del cliente, octubre 2026); acá solo
+// queda la medición del clic. Los arreglos de estilo y la posición del botón siguen en app/globals.css.
 // El botón lo inserta el widget y es un <button>, no un link: el disparador de clics en links que tenía GTM no lo
 // ve, así que el clic se avisa a GTM como evento "click_consultanos".
 export default function AsisteClick() {
@@ -20,11 +19,5 @@ export default function AsisteClick() {
     return () => document.removeEventListener("click", alHacerClic, true);
   }, []);
 
-  return (
-    <Script
-      id="asisteclick"
-      strategy="lazyOnload"
-      src="https://app.asisteclick.com/v3/widget.php?id=8831853-5985&async=1&floating=DL&deptid=0&layer=1"
-    />
-  );
+  return null;
 }
