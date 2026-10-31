@@ -41,8 +41,13 @@ Next 16.4 (App Router, sin `src/`), React 19.3, TypeScript, Tailwind v4 vía `@t
 ## Pendientes del cliente/diseñadora
 Mobile, versión del formulario y footer (larga en las páginas vs. corta suelta), destino de "Trabajá con nosotros" y política de privacidad. WhatsApp y redes ya están en `lib/site.ts`.
 
+## Hosting (Vercel ahora, SiteGround más adelante)
+- **Dos repos:** `origin` (emilianosala/mas-cuidados-web, conectado a SiteGround) y `cliente` (jose-luis-tamborini/web-Mas-Cuidados, conectado al Vercel del dueño, proyecto `mas-cuidados-web`). `git push` sube a los dos (origin tiene las dos direcciones de push).
+- **Por qué Vercel (noviembre 2026):** en SiteGround un dominio no puede estar en dos sitios a la vez, y los mails de @mascuidados.com.ar (~68 casillas, ~50 GB) viven en el sitio del WordPress; pasar el dominio al proyecto de Node obliga a migrarlos (Email Migrator, contraseñas personales de cada usuario). Hasta que se migren, el dominio sigue en SiteGround (DNS y mails) y solo los registros de `@` y `www` apuntan a Vercel. Al pasar a SiteGround: migrar mails, "Cambiar dominio principal" (WordPress → old.mascuidados.com.ar, joset39.sg-host.com → mascuidados.com.ar) y devolver esos registros.
+- La cuenta de Vercel del dueño es Hobby: los deploys por CLI con commits del usuario quedan bloqueados ("commit author doesn't have permission"); por GitHub (repo del dueño) sí publican, como la landing.
+
 ## Hosting (SiteGround)
-- La web corre en el plan GoGeek del cliente como "Proyecto de Node.js" (Site Tools → Node.js), conectado a GitHub: cada push a `main` se compila y publica solo (~1 min). Dirección temporal: https://joset39.sg-host.com. El WordPress actual de mascuidados.com.ar está en el mismo plan; Vercel queda como copia.
+- La web corre en el plan GoGeek del cliente como "Proyecto de Node.js" (Site Tools → Node.js), conectado a GitHub: cada push a `main` se compila y publica solo (~1 min). Dirección temporal: https://joset39.sg-host.com. El WordPress actual de mascuidados.com.ar está en el mismo plan.
 - **Variables del panel:** SiteGround las pasa al compilar pero no a la web encendida, y pierde los valores con espacios o `<>`. Por eso `next.config.ts` copia al código del servidor las del formulario y el remitente por defecto está en `route.ts`. **Al cambiar una variable hay que volver a desplegar** ("Guardar y desplegar"). El registro de compilación muestra cuáles ve (`[check-node] Variables del formulario`).
 - Formulario: Resend con el dominio `mascuidados.com.ar` verificado (DNS en la Zona DNS del WordPress en SiteGround) y la clave `web-siteground` (solo envío, solo ese dominio). En el panel: `RESEND_API_KEY` y `NOTIFICATION_EMAIL`.
 
