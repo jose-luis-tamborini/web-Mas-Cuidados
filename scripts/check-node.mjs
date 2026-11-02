@@ -12,7 +12,7 @@ console.log(`[check-node] Node ${process.versions.node}`);
 // Para revisar en el registro de compilación qué variables del formulario ve el hosting (solo sí/no, nunca el valor).
 console.log(
   "[check-node] Variables del formulario: " +
-    ["RESEND_API_KEY", "RESEND_FROM", "NOTIFICATION_EMAIL"].map((k) => `${k} ${process.env[k] ? "sí" : "no"}`).join(", "),
+    ["RESEND_API_KEY", "RESEND_FROM", "NOTIFICATION_EMAIL", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].map((k) => `${k} ${process.env[k] ? "sí" : "no"}`).join(", "),
 );
 if (!ok) {
   console.error(

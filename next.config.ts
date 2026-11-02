@@ -4,7 +4,13 @@ import type { NextConfig } from "next";
 // configurado"). Las del formulario se copian al código del servidor al compilar: solo las usa
 // app/api/contacto/route.ts, nunca un componente del navegador. Se copian solo si existen al compilar, para
 // no pisar las que dé el hosting mientras la web funciona (Vercel).
-const variablesFormulario = ["RESEND_API_KEY", "RESEND_FROM", "NOTIFICATION_EMAIL"].filter((k) => process.env[k]);
+const variablesFormulario = [
+  "RESEND_API_KEY",
+  "RESEND_FROM",
+  "NOTIFICATION_EMAIL",
+  "SUPABASE_URL",
+  "SUPABASE_SERVICE_ROLE_KEY",
+].filter((k) => process.env[k]);
 
 const nextConfig: NextConfig = {
   /* config options here */
