@@ -55,6 +55,14 @@ const nextConfig: NextConfig = {
       ...aLaHome.map((source) => ({ source, destination: "/", permanent: true })),
       { source: "/wp-sitemap.xml", destination: "/sitemap.xml", permanent: true },
       { source: "/wp-sitemap-:sitemap.xml", destination: "/sitemap.xml", permanent: true },
+      // Con el dominio en SiteGround, mascuidados.com.ar/webmail abría el webmail de las casillas. Mientras el
+      // dominio apunte acá y los mails sigan en el servidor del WordPress (gtxm1008), se manda ahí. Temporal:
+      // al migrar los mails cambia de servidor (ver "Hosting" en CLAUDE.md).
+      {
+        source: "/webmail/:path*",
+        destination: "https://gtxm1008.siteground.biz/webmail/",
+        permanent: false,
+      },
     ];
   },
 };
