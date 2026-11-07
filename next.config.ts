@@ -12,6 +12,10 @@ const variablesFormulario = [
   "SUPABASE_SERVICE_ROLE_KEY",
 ].filter((k) => process.env[k]);
 
+// Servidor de SiteGround donde están los mails de @mascuidados.com.ar desde el pase de las casillas al proyecto
+// de Node (noviembre 2026; antes, gtxm1008). Si se recrea el proyecto, confirmar el servidor en su Site Tools.
+const servidorMails = "gtxm1257.siteground.biz";
+
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
@@ -47,6 +51,22 @@ const nextConfig: NextConfig = {
       "/comments/feed",
     ];
     return [
+      // mascuidados.com.ar/webmail es la dirección del webmail que usa el personal. Va primero para que no pase
+      // por la redirección a www. Si SiteGround atiende /webmail antes que Next, esta regla no llega a usarse.
+      {
+        source: "/webmail/:path*",
+        destination: `https://${servidorMails}/webmail/`,
+        permanent: false,
+      },
+      // La dirección de la web es www.mascuidados.com.ar. En Vercel la redirección del dominio solo la hace el
+      // panel de dominios; en SiteGround el dominio solo llega a la web y se redirige acá, con la ruta y los
+      // parámetros (gclid, UTM). Antes lo hacía el .htaccess del WordPress.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "mascuidados\\.com\\.ar" }],
+        destination: "https://www.mascuidados.com.ar/:path*",
+        permanent: true,
+      },
       ...Object.entries(bloques).map(([bloque, destination]) => ({
         source: `/pxl-template/${bloque}`,
         destination,
@@ -55,14 +75,6 @@ const nextConfig: NextConfig = {
       ...aLaHome.map((source) => ({ source, destination: "/", permanent: true })),
       { source: "/wp-sitemap.xml", destination: "/sitemap.xml", permanent: true },
       { source: "/wp-sitemap-:sitemap.xml", destination: "/sitemap.xml", permanent: true },
-      // Con el dominio en SiteGround, mascuidados.com.ar/webmail abría el webmail de las casillas. Mientras el
-      // dominio apunte acá y los mails sigan en el servidor del WordPress (gtxm1008), se manda ahí. Temporal:
-      // al migrar los mails cambia de servidor (ver "Hosting" en CLAUDE.md).
-      {
-        source: "/webmail/:path*",
-        destination: "https://gtxm1008.siteground.biz/webmail/",
-        permanent: false,
-      },
     ];
   },
 };
