@@ -13,8 +13,9 @@ const variablesFormulario = [
 ].filter((k) => process.env[k]);
 
 // Servidor de SiteGround donde están los mails de @mascuidados.com.ar desde el pase de las casillas al proyecto
-// de Node (noviembre 2026; antes, gtxm1008). Si se recrea el proyecto, confirmar el servidor en su Site Tools.
-const servidorMails = "gtxm1257.siteground.biz";
+// de Node (8/11/2026; antes, gtxm1008). Si se recrea el proyecto, confirmarlo con el certificado o el saludo SMTP
+// de mail.mascuidados.com.ar (soporte había dicho gtxm1257 y resultó otro).
+const servidorMails = "gtxm1362.siteground.biz";
 
 const nextConfig: NextConfig = {
   /* config options here */
